@@ -22,9 +22,51 @@ class SinhVien {
 }
 
 // Tạo các đối tượng sinh viên
-$sv1 = new SinhVien("Nguyen Van A", 8.5, 7.2, 9.0);
-$sv2 = new SinhVien("Tran Thi B", 7.8, 6.5, 8.3);
-$sv3 = new SinhVien("Le Van C", 9.0, 8.0, 7.5);
+$sv1 = new SinhVien("Nguyen Van An", 8.5, 7.2, 9.0);
+$sv2 = new SinhVien("Tran Thi Binh", 7.8, 6.5, 8.3);
+$sv3 = new SinhVien("Le Van Nam", 9.0, 8.0, 7.5);
+$sv4 = new SinhVien("Nguyen Van An", 8, 9, 9.0);
+
+$mSv = [$sv1, $sv2, $sv3, $sv4];
+
+$searchName = $_GET['search'];
+if($searchName){
+    echo "<br> search:". $searchName;
+    $mSvFound = [];
+    foreach($mSv AS $sv){
+        if($sv->ten == $searchName){
+            echo "<br> Found: ". $searchName;
+            $mSvFound[] = $sv;
+        }
+    }
+}
+$mSv = $mSvFound;
+
+
+$sort_hoa = $_GET['sort_hoa'];
+$sort_tb = $_GET['sort_tb'];
+
+if($sort_hoa){
+    //Sap xep theo Diem Hoa o day
+}
+
+if($sort_tb){
+    //Sap xep theo Diem Trung binh o day
+    // usort($mSv, function ($a, $b){
+    //     return $a->diemTrungBinh > $b->diemTrungBinh;
+    // });
+    //Neu khong dung usort, thi dung vong lap for de sap xep:
+    for($i = 0; $i < count($mSv); $i++){
+        for($j = $i + 1; $j < count($mSv); $j++){
+            if($mSv[$i]->diemTrungBinh < $mSv[$j]->diemTrungBinh){
+                $tmp = $mSv[$i];
+                $mSv[$i] = $mSv[$j];
+                $mSv[$j] = $tmp;
+            }
+        }
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -42,30 +84,24 @@ $sv3 = new SinhVien("Le Van C", 9.0, 8.0, 7.5);
             <th>Tên</th>
             <th>Điểm Toán</th>
             <th>Điểm Lý</th>
-            <th>Điểm Hóa</th>
-            <th>Điểm Trung Bình</th>
+            <th> <a href="/b05/b05-diem-tb-table.php?sort_hoa=1">Điểm Hóa</a></th>
+            <th> <a href="/b05/b05-diem-tb-table.php?sort_tb=1">Điểm Trung Bình</a> </th>
         </tr>
+
+        <?php 
+        foreach($mSv AS $sv){
+        ?>
         <tr>
-            <td><?php echo $sv1->ten; ?></td>
-            <td><?php echo $sv1->diemToan; ?></td>
-            <td><?php echo $sv1->diemLy; ?></td>
-            <td><?php echo $sv1->diemHoa; ?></td>
-            <td><?php echo $sv1->diemTrungBinh; ?></td>
+            <td><?php echo $sv->ten; ?></td>
+            <td><?php echo $sv->diemToan; ?></td>
+            <td><?php echo $sv->diemLy; ?></td>
+            <td><?php echo $sv->diemHoa; ?></td>
+            <td><?php echo $sv->diemTrungBinh; ?></td>
         </tr>
-        <tr>
-            <td><?php echo $sv2->ten; ?></td>
-            <td><?php echo $sv2->diemToan; ?></td>
-            <td><?php echo $sv2->diemLy; ?></td>
-            <td><?php echo $sv2->diemHoa; ?></td>
-            <td><?php echo $sv2->diemTrungBinh; ?></td>
-        </tr>
-        <tr>
-            <td><?php echo $sv3->ten; ?></td>
-            <td><?php echo $sv3->diemToan; ?></td>
-            <td><?php echo $sv3->diemLy; ?></td>
-            <td><?php echo $sv3->diemHoa; ?></td>
-            <td><?php echo $sv3->diemTrungBinh; ?></td>
-        </tr>
+        <?php
+        }
+        ?>
+        
     </table>
 </body>
 </html>

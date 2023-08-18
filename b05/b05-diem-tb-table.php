@@ -77,6 +77,9 @@ if($sort_tb){
 
     </style>
 </head>
+
+
+
 <body>
     <h1>Bảng điểm sinh viên</h1>
     <table border="1">
@@ -84,15 +87,17 @@ if($sort_tb){
             <th>Tên</th>
             <th>Điểm Toán</th>
             <th>Điểm Lý</th>
-            <th> <a href="/b05/b05-diem-tb-table.php?sort_hoa=1">Điểm Hóa</a></th>
+            <th> <a href="<?php echo $_SERVER['PHP_SELF']; $x = 111 ?>?sort_hoa=1">Điểm Hóa</a></th>
             <th> <a href="/b05/b05-diem-tb-table.php?sort_tb=1">Điểm Trung Bình</a> </th>
         </tr>
 
         <?php 
+        
         foreach($mSv AS $sv){
         ?>
         <tr>
-            <td><?php echo $sv->ten; ?></td>
+            <td class="abc"><?php echo $sv->ten; ?></td>
+            <!-- <?php echo "<td class='abc'> $sv->ten </td>"; ?> -->
             <td><?php echo $sv->diemToan; ?></td>
             <td><?php echo $sv->diemLy; ?></td>
             <td><?php echo $sv->diemHoa; ?></td>

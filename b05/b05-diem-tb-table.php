@@ -1,9 +1,11 @@
 <?php
 class SinhVien {
+    
     public $ten;
     public $diemToan;
     public $diemLy;
     public $diemHoa;
+
     public $diemTrungBinh;
 
     // Constructor

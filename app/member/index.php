@@ -1,23 +1,10 @@
-<b>MEMBER</b>
-<hr>
-<a href="/">Trang Chủ</a> |
-<a href="/member?ctrl=orders">Đơn hàng</a> |
-<a href="/member">Tài khoản</a>
-<hr>
 
 <?php
-$act = $_GET['ctrl'] ?? null;
+require_once __DIR__."/header.php"
 ?>
-<div class="content">
-    <?php
-    if ($act == 'orders') {
-        require_once "orders.php";
-    } else {
-        require_once "main.php";
-    }
-    ?>
 
-</div>
+Index Member
 
-<hr>
-Footer Member
+<?php
+require_once  __DIR__."/footer.php"
+?>

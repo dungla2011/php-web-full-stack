@@ -1,11 +1,3 @@
-<b>ADMIN</b>
-<hr>
-<a href="/">Trang Chủ</a> |
-<a href="/admin?ctrl=news">Tin tức</a> |
-<a href="/admin?ctrl=products">Sản phẩm</a> |
-<a href="/admin?ctrl=orders">Đơn hàng</a> |
-<a href="/admin?ctrl=users">Người dùng</a>
-<hr>
 
 <?php
 $act = $_GET['ctrl'] ?? null;
@@ -28,8 +20,4 @@ $act = $_GET['ctrl'] ?? null;
         require_once "main.php";
     }
     ?>
-
 </div>
-
-<hr>
-Footer admin

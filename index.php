@@ -23,5 +23,5 @@ foreach($routes AS $uri => $file){
     }
 }
 
-echo("\n<br/> Debug info, URI = $rqUri , $file");
+echo("\n<hr/> <i>  Debug info, URI = $rqUri , $file </i>");
 echo("\n<br/>");

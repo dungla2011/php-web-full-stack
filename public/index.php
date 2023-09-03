@@ -19,8 +19,6 @@ $routes = [
     '/admin' => [AdminController::class, 'index'],
     '/member' => [MemberController::class, 'index'],
     '/' => [HomeController::class, 'index'],
-
-
 ];
 
 

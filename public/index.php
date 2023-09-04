@@ -1,5 +1,7 @@
 <?php
 
+require "../app/Database.php";
+
 $rqUri = $_SERVER['REQUEST_URI'];
 
 //Tên route: nếu giống nhau phần đầu, thì các route dài hơn được đặt ở trên để được xử lý đúng
@@ -26,9 +28,6 @@ foreach($routes AS $uri => $ctrl){
     if(str_starts_with($rqUri, $uri)){
         $class = $ctrl[0];  //Ví dụ: UserController
         $method = $ctrl[1]; //Ví dụ: list
-        
-        // echo("\n<br/> OK $class");
-
         //File Controller cần include
         $file = "../app/controllers/".$class.".php";
         require_once $file;

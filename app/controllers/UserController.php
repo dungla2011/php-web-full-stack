@@ -6,6 +6,9 @@ require_once '../app/models/User.php';
 
 class UserController {
     public function list() {
+
+        $data = User::list();
+
         // Gọi view để hiển thị list user
         require_once '../app/views/users/list.php';
     }

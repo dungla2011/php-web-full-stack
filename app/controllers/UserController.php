@@ -24,6 +24,13 @@ class UserController {
     }
 
     public function add() {
+
+        if($_POST['username'] ?? ''){
+            echo "<pre>";
+            print_r($_POST);
+            echo "</pre>";
+        }
+        
         // Gọi view để hiển thị add user
         require_once '../app/views/users/add.php';
     }

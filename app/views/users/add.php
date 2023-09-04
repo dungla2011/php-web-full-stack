@@ -5,13 +5,6 @@ require_once "../templates/admin/header.php"
 
 Add user
 
-<?php
-if($_POST['username'] ?? ''){
-    echo "<pre>";
-    print_r($_POST);
-    echo "</pre>";
-}
-?>
 
 <p></p>
 

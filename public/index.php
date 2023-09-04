@@ -6,15 +6,6 @@ $rqUri = $_SERVER['REQUEST_URI'];
 
 //Tên route: nếu giống nhau phần đầu, thì các route dài hơn được đặt ở trên để được xử lý đúng
 $routes = [
-    // '/admin/users/add' => "app/admin/users/add.php",
-    // '/admin/users' => "app/admin/users/index.php",
-    // '/admin/news' => "app/admin/news.php",
-    // '/admin/products' => "app/admin/products.php",
-    // '/admin/orders' => "app/admin/orders.php",
-    // '/admin' => "app/admin/index.php",
-    // '/member/orders' => "app/member/orders/index.php",
-    // '/member' => "app/member/index.php",
-    
     '/admin/users/edit' => [UserController::class, 'edit'],
     '/admin/users/add' => [UserController::class, 'add'],
     '/admin/users' => [UserController::class, 'list'],

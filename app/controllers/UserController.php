@@ -28,12 +28,13 @@ class UserController {
             echo "<pre>";
             print_r($_POST);
             echo "</pre>";
+            $error = '';
             try{
                 if(User::add($_POST))
                     Header("Location: /admin/users/list");
             }
             catch(Exception $e){
-                echo("\n<br/> Có lỗi: " . $e->getMessage() . " <br>");
+                $error = "\nCó lỗi: " . $e->getMessage();
             }
         }
         

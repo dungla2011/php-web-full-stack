@@ -8,6 +8,13 @@ Add user
 
 <p></p>
 
+<?php
+
+if($error)
+    echo "<p style='color: red'>$error </p>";
+
+?>
+
 <form action="" method="post">
 
     Username: <input name="username" type="text" placeholder="Nhap username" />

@@ -40,7 +40,7 @@ class User {
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':first_name', $first_name);
         $stmt->bindParam(':last_name', $last_name);
-        $stmt->bindParam(':password', $password);       
+        $stmt->bindParam(':password', $password);//Password có thể cần thêm băm để bảo mật
 
         return $stmt->execute();
         

@@ -24,11 +24,17 @@ class UserController {
     }
 
     public function add() {
-
         if($_POST['username'] ?? ''){
             echo "<pre>";
             print_r($_POST);
             echo "</pre>";
+            try{
+                if(User::add($_POST))
+                    Header("Location: /admin/users/list");
+            }
+            catch(Exception $e){
+                echo("\n<br/> Có lỗi: " . $e->getMessage() . " <br>");
+            }
         }
         
         // Gọi view để hiển thị add user

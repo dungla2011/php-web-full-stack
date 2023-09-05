@@ -14,6 +14,10 @@ Add user
     <p></p>
     Email: <input name='email' type="text" placeholder="Nhap email" />
     <p></p>
+    FirstName: <input name='first_name' type="text" placeholder="Nhap first_name" />
+    <p></p>
+    LastName: <input name='last_name' type="text" placeholder="Nhap last_name" />
+    <p></p>
     Password: <input name='password' type='password' />
 
     <p></p>

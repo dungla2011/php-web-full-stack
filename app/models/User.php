@@ -16,6 +16,36 @@ class User {
         return $this->email;
     }
 
+    public static function add($param){
+        $database = Database::getInstance();
+        // Lấy kết nối cơ sở dữ liệu
+        $conn = $database->getConnection();
+        // Sử dụng $dbConnection để thực hiện các truy vấn cơ sở dữ liệu
+        $username = $param['username'];
+        $email = $param['email'];
+        $password = $param['password'];
+        $last_name = $param['last_name'];
+        $first_name = $param['first_name'];
+        /////////////////////////////////////
+        //Cách cơ bản này có thể insert được, nhưng dễ bị tấn công SQL Injection:
+        $sql = "INSERT INTO users (username, email, password, first_name, last_name)
+        VALUES ('$username', '$email' , '$password', '$first_name', '$last_name')";
+        //return $conn->exec($sql);
+
+        //Ta nên dùng cách nâng cao sau để insert, là php_mysql_prepared_statements
+        //Tham khảo: https://www.w3schools.com/php/php_mysql_prepared_statements.asp
+        $stmt = $conn->prepare("INSERT INTO users (username, email, password, first_name, last_name) 
+        VALUES (:username, :email, :password, :first_name, :last_name)");
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':first_name', $first_name);
+        $stmt->bindParam(':last_name', $last_name);
+        $stmt->bindParam(':password', $password);       
+
+        return $stmt->execute();
+        
+    }
+
     public static function list(){
         // Lấy đối tượng Database (singleton)
         $database = Database::getInstance();

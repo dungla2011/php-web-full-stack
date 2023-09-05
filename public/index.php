@@ -39,3 +39,7 @@ echo "<pre>";
 print_r($ctrl);
 echo "</pre>";
 echo("\n<br/>");
+
+echo "<pre> Include File List: ";
+print_r(get_included_files());
+echo "</pre>";

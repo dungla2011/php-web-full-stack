@@ -17,9 +17,9 @@ class User {
     }
 
     public static function add($param){
-        $database = Database::getInstance();
+        
         // Lấy kết nối cơ sở dữ liệu
-        $conn = $database->getConnection();
+        $conn = Database::getConnection();
         // Sử dụng $dbConnection để thực hiện các truy vấn cơ sở dữ liệu
         $username = $param['username'];
         $email = $param['email'];
@@ -47,10 +47,8 @@ class User {
     }
 
     public static function list(){
-        // Lấy đối tượng Database (singleton)
-        $database = Database::getInstance();
         // Lấy kết nối cơ sở dữ liệu
-        $conn = $database->getConnection();
+        $conn = Database::getConnection();
         // Sử dụng $dbConnection để thực hiện các truy vấn cơ sở dữ liệu
         $sql = "SELECT * FROM Users";
         $stmt = $conn->prepare($sql);

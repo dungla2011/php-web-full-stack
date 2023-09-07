@@ -14,6 +14,3 @@
 <a href="/admin/users">Người dùng</a>
 <hr>
 
-
-</body>
-</html>

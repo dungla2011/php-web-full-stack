@@ -6,7 +6,7 @@ class Database {
     private $dbname = "demo_mvc";
     private $charset = "utf8mb4";
 
-    private static $instance = null;
+    private static $instance = null; //singleton designpattern
     private $connection;
 
     private function __construct() {

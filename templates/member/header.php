@@ -13,5 +13,3 @@ MEMBER</b>
 <a href="/member">Tài khoản</a>
 <hr>
 
-</body>
-</html>

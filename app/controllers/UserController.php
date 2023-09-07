@@ -1,44 +1,73 @@
 <?php
-
-
-
 require_once '../app/models/User.php';
+class UserController
+{
 
-class UserController {
-    public function list() {
-
-        $data = User::list();
-
-        // Gọi view để hiển thị list user
-        require_once '../app/views/users/list.php';
+    public function list()
+    {
+        try{
+            $data = User::list();
+            require_once "../app/views/userList.php";
+        } catch (PDOException $e) {
+            $error =  "Có lỗi: " . $e->getMessage();
+            return null;
+        }
     }
 
-    public function edit() {
-        $uid = $_GET['id'] ?? 0;
-        if(!$uid)
-            die("Not userid?");
-        // Lấy đối tượng User từ dữ liệu cơ sở dữ liệu...
-        $user = new User($uid, 'example@email.com');
-        // Gọi view để hiển thị thông tin người dùng
-        require_once '../app/views/users/edit.php';
-    }
+    public function add()
+    {
 
-    public function add() {
         if($_POST['username'] ?? ''){
-            echo "<pre>";
-            print_r($_POST);
-            echo "</pre>";
-            $error = '';
             try{
-                if(User::add($_POST))
-                    Header("Location: /admin/users/list");
-            }
-            catch(Exception $e){
-                $error = "\nCó lỗi: " . $e->getMessage();
+                $ret = User::add($_POST);
+                if($ret){
+                    Header("Location: /admin/users");
+                }
+            } catch (PDOException $e) {
+                $error =  "Có lỗi: " . $e->getMessage();
+                return null;
             }
         }
-        
-        // Gọi view để hiển thị add user
-        require_once '../app/views/users/add.php';
+
+        require_once "../app/views/userAdd.php";
+    }
+
+    public function edit()
+    {
+
+        $ret  = null;
+        if($id = ($_GET['id'] ?? '')){
+            try{
+                $ret = User::get($id);
+                if($_POST['username'] ?? ''){
+                    User::save($id, $_POST);
+                    $ret = User::get($id);
+                    $msg = "Update thành công!";
+                }
+                //  if($ret){
+                //      Header("Location: /admin/users");
+                // }
+            } catch (PDOException $e) {
+                $error =  "Có lỗi: " . $e->getMessage();
+                return null;
+            }
+        }
+
+        require_once "../app/views/userEdit.php";
+    }
+
+    public function delete()
+    {
+        if($id = ($_GET['id'] ?? '')){
+            try{
+                $ret = User::delete($id);
+                if($ret){
+                    Header("Location: /admin/users");
+                }
+            } catch (PDOException $e) {
+                echo "<br>Có lỗi: " . $e->getMessage();
+                return null;
+            }
+        }
     }
 }

@@ -1,77 +1,96 @@
 <?php
-class User {
-    private $username;
-    private $email;
+class User
+{
 
-    public function __construct($username, $email) {
-        $this->username = $username;
-        $this->email = $email;
-    }
-
-    public function getUsername() {
-        return $this->username;
-    }
-
-    public function getEmail() {
-        return $this->email;
-    }
-
-    public static function add($param){
-        
-        // Lấy kết nối cơ sở dữ liệu
+    public static function delete($id)
+    {
         $conn = Database::getConnection();
-        // Sử dụng $dbConnection để thực hiện các truy vấn cơ sở dữ liệu
-        $username = $param['username'];
-        $email = $param['email'];
-        $password = $param['password'];
-        $last_name = $param['last_name'];
-        $first_name = $param['first_name'];
+        $stmt = $conn->prepare("DELETE FROM users WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        return $stmt->execute();
+    }
+
+    public static function add($params)
+    {
+
+        $conn = Database::getConnection();
+        $username = $params['username'];
+        $email = $params['email'];
+        $password = $params['password'];
+
         /////////////////////////////////////
         //Cách cơ bản này có thể insert được, nhưng dễ bị tấn công SQL Injection:
         $sql = "INSERT INTO users (username, email, password, first_name, last_name)
         VALUES ('$username', '$email' , '$password', '$first_name', '$last_name')";
         //return $conn->exec($sql);
 
+        // $sql = "INSERT INTO users (username, email, password)
+        //  VALUES ('$username', '$email', '$password')";    // use exec() because no results are returned
+        //$conn->exec($sql);
+        //echo "New record created succesfully";
+
         //Ta nên dùng cách nâng cao sau để insert, là php_mysql_prepared_statements
         //Tham khảo: https://www.w3schools.com/php/php_mysql_prepared_statements.asp
-        $stmt = $conn->prepare("INSERT INTO users (username, email, password, first_name, last_name) 
-        VALUES (:username, :email, :password, :first_name, :last_name)");
+        $stmt = $conn->prepare("INSERT INTO users (username, email, password) 
+        VALUES (:username, :email, :password)");
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':first_name', $first_name);
-        $stmt->bindParam(':last_name', $last_name);
-        $stmt->bindParam(':password', $password);//Password có thể cần thêm băm để bảo mật
-
+        $stmt->bindParam(':password', $password); //Password có thể cần thêm băm để bảo mật
         return $stmt->execute();
-        
     }
 
-    public static function list(){
-        // Lấy kết nối cơ sở dữ liệu
+
+    public static function save($id, $params)
+    {
+
         $conn = Database::getConnection();
-        // Sử dụng $dbConnection để thực hiện các truy vấn cơ sở dữ liệu
-        $sql = "SELECT * FROM Users";
-        $stmt = $conn->prepare($sql);
+        $username = $params['username'];
+        $email = $params['email'];
+        $password = $params['password'];
+
+        // $sql = "INSERT INTO users (username, email, password)
+        //  VALUES ('$username', '$email', '$password')";    // use exec() because no results are returned
+        //$conn->exec($sql);
+        //echo "New record created succesfully";
+
+        //Ta nên dùng cách nâng cao sau để insert, là php_mysql_prepared_statements
+        //Tham khảo: https://www.w3schools.com/php/php_mysql_prepared_statements.asp
+        $stmt = $conn->prepare("UPDATE users SET username = :username, email=:email, password=:password WHERE id=:id");
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':username', $username);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':password', $password); //Password có thể cần thêm băm để bảo mật
+        return $stmt->execute();
+    }
+
+    public static function get($id)
+    {
+        $conn = Database::getConnection();
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //echo "Connected successfully";
+        $stmt = $conn->prepare("SELECT * FROM users WHERE id=:id");
+        $stmt->bindParam(':id', $id);
         $stmt->execute();
         // set the resulting array to associative
-        $stmt->setFetchMode(PDO::FETCH_ASSOC);
-        
-        return $stmt->fetchAll();
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $ret = $stmt->fetchAll();
+        if ($ret)
+            return $ret[0];
+        return null;
+    }
 
-        // $cc = 0;
-        // foreach($stmt->fetchAll() as $k=>$v) {
-        //     $cc++;
-        //     echo "<pre>";
-        //     print_r($v);
-        //     echo "</pre>";
-        //     $id = $v['id'];
-        //     $first_name = $v['first_name'];
-        //     $last_name = $v['last_name'];
-        //     $email = $v['email'];
-        //     echo("\n<br/> $cc.  $id | $first_name | $last_name | $email");
-        // }
-
-
-
+    public static function list()
+    {
+        $conn = Database::getConnection();
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //echo "Connected successfully";
+        $stmt = $conn->prepare("SELECT * FROM users");
+        $stmt->execute();
+        // set the resulting array to associative
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $ret = $stmt->fetchAll();
+        return $ret;
     }
 }

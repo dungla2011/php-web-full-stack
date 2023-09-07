@@ -14,6 +14,3 @@
 <a href="/admin">ACP</a>
 <hr>
 
-
-</body>
-</html>

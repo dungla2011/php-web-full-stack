@@ -12,17 +12,37 @@ if(isset($error))
     echo "<p> $error </p> ";
 
 ?>
+<p></p>
+Trang: 
+<?php
+    if(isset($nPage))
+    for($i = 1; $i <= $nPage ; $i++){
+        echo("\n <a href='/admin/users?page=$i'> $i </a> | ");
+    }
+    $sort_type = "asc";
+    if($_GET['sort_type'] ?? ''){
+        $sort_type = $_GET['sort_type'];
+        if($sort_type == 'asc')
+            $sort_type = 'desc';
+        else
+            $sort_type = 'asc';
+    }
+?>
 
 <table border="1">
     <tr>
 <td>Id</td>
-<td>User</td>
-<td>Email</td>
+<td> <a href="/admin/users?sort_by=username&sort_type=<?php echo $sort_type  ?>"> 
+Username </a></td>
+<td> <a href="/admin/users?sort_by=email&sort_type=<?php echo $sort_type  ?>"> 
+Email </a></td>
+
 <td>Action</td>
 
     </tr>
 <?php 
 
+    if(isset($data))
     foreach($data AS $one){
         $id = $one['id'];
         $username = $one['username'];
@@ -40,6 +60,9 @@ if(isset($error))
     }
 ?>
 </table>
+
+
+
 
 <?php
 require_once "../templates/admin/footer.php"

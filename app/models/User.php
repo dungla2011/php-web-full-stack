@@ -80,14 +80,55 @@ class User
         return null;
     }
 
-    public static function list()
+    public static function count($param = null)
     {
         $conn = Database::getConnection();
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         //echo "Connected successfully";
-        $stmt = $conn->prepare("SELECT * FROM users");
+        $stmt = $conn->prepare("SELECT count(*) AS c FROM users");
         $stmt->execute();
+        // set the resulting array to associative
+        $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $ret = $stmt->fetchAll();
+        return $ret[0]['c'];
+    }
+
+    public static function list($param)
+    {
+        $page = $param['page'];
+        //Page = 0 -> offset = 0,
+        //Page = 1 -> offset = 5,
+        //Page = 2 -> offset = 10,...
+        $limit = $param['limit'];
+        $offset = ($page - 1) * $limit;
+
+        $sql = "SELECT * FROM users LIMIT :limit OFFSET :offset";
+
+        $sort_by = $param['sort_by'];
+        $sort_type = $param['sort_type'];
+
+        if(in_array($sort_by, ['username', 'email']))
+            if(in_array($sort_type, ['asc', 'desc']))
+                $sql = "SELECT * FROM users ORDER BY $sort_by $sort_type LIMIT :limit OFFSET :offset";
+        
+        // echo "<pre>";
+        // print_r($param);
+        // echo "</pre>";
+        // die($sql);
+
+        $conn = Database::getConnection();
+        // set the PDO error mode to exception
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //echo "Connected successfully";
+        $stmt = $conn->prepare($sql);
+        
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+
+        // $stmt->debugDumpParams();
+
         // set the resulting array to associative
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $ret = $stmt->fetchAll();

@@ -4,14 +4,36 @@ class UserController
 {
 
     public function list()
-    {
+    {        
         try{
-            $data = User::list();
-            require_once "../app/views/userList.php";
+            //sort_by=username&sort_type=asc
+            $sort_by = $_GET['sort_by'] ?? 0;
+            $sort_type = $_GET['sort_type'] ?? 0;
+
+
+
+            //Limit/Offset 
+            $page = $_GET['page'] ?? 1;
+            $limit = 5;
+            $param = ['page'=>$page, 
+            'limit' => $limit,
+            'sort_by' => $sort_by,
+            'sort_type' => $sort_type,
+            ];
+
+            $data = User::list($param);
+
+
+            $total = User::count();
+            $nPage = ceil($total / $limit);
+            
+            
         } catch (PDOException $e) {
             $error =  "Có lỗi: " . $e->getMessage();
-            return null;
+            // return null;
         }
+
+        require_once "../app/views/userList.php";
     }
 
     public function add()

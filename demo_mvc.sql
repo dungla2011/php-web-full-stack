@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 04, 2023 at 06:51 AM
+-- Generation Time: Sep 08, 2023 at 04:13 AM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.1.17
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -42,8 +42,29 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `first_name`, `last_name`, `phone_number`) VALUES
-(1, 'billgate', 'billgate@gmail.com', '12345678', 'Bill', 'Gate', NULL),
-(2, 'stevejob', 'stevejob@gmail.com', '', 'Steve', 'Job', NULL);
+(10, 'bilgate1', 'bilgate@gmail.com', '', NULL, NULL, NULL),
+(11, 'stevejob', 'stevejob@gmail.com', '', NULL, NULL, NULL),
+(12, 'stevejob', 'stevejob@gmail.com', '', NULL, NULL, NULL),
+(16, 'gastown', 'gastown@outlook.com', '', NULL, NULL, NULL),
+(17, 'library', 'library@verizon.net', '', NULL, NULL, NULL),
+(18, 'penna', 'penna@mac.com', '', NULL, NULL, NULL),
+(19, 'amichalo', 'amichalo@live.com', '', NULL, NULL, NULL),
+(20, 'microfab', 'microfab@att.net', '', NULL, NULL, NULL),
+(21, 'enintend', 'enintend@msn.com', '', NULL, NULL, NULL),
+(22, 'seurat', 'seurat@hotmail.com', '', NULL, NULL, NULL),
+(23, 'gward', 'gward@msn.com', '', NULL, NULL, NULL),
+(24, 'mddallara', 'mddallara@mac.com', '', NULL, NULL, NULL),
+(25, 'odlyzko', 'odlyzko@comcast.net', '', NULL, NULL, NULL),
+(26, 'frikazoyd', 'frikazoyd@sbcglobal.net', '', NULL, NULL, NULL),
+(27, 'crobles', 'crobles@live.com', '', NULL, NULL, NULL),
+(28, 'parksh', 'parksh@yahoo.com', '', NULL, NULL, NULL),
+(29, 'kobayasi', 'kobayasi@aol.com', '', NULL, NULL, NULL),
+(30, 'bmidd', 'bmidd@gmail.com', '', NULL, NULL, NULL),
+(31, 'hmbrand', 'hmbrand@live.com', '', NULL, NULL, NULL),
+(32, 'farber', 'farber@outlook.com', '', NULL, NULL, NULL),
+(33, 'syrinx', 'syrinx@optonline.net', '', NULL, NULL, NULL),
+(34, 'mosses', 'mosses@aol.com', '', NULL, NULL, NULL),
+(35, 'giafly', 'giafly@verizon.net', '', NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -63,7 +84,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -37,3 +37,5 @@ echo("\n<br/> Controller->Action: $class() -> $method() ");
 echo "<pre> File includes: ";
 print_r(get_included_files());
 echo "</pre>";
+
+

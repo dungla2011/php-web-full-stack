@@ -2,7 +2,7 @@
 
 Ở phần Code MVC, chúng ta cài đặt như sau:
 - Code từng bài đưa vào c:/code
-- Trong C:\xampp\apache\conf\httpd.conf , ta đưa các dòng sau đây vào cuối:
+- Trong C:\xampp\apache\conf\httpd.conf , ta đưa các dòng sau đây vào cuối file:
 
 ```
 <VirtualHost *:80>

@@ -15,8 +15,11 @@ Tìm email: <input type="text" name='search_email' value="<?php echo $_GET['sear
 <?php 
 if(isset($msg))
     echo "<p> $msg </p> ";
-if(isset($error))
-    echo "<p> $error </p> ";
+if(isset($error)){
+    echo "<pre>";
+    print_r($error);
+    echo "</pre>";
+}
 
 ?>
 <p></p>

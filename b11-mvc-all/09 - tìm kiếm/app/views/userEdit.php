@@ -15,8 +15,11 @@ Edit user ...
 if(isset($msg))
     echo "<p> $msg </p> ";
 
-if(isset($error))
-    echo "<p> $error </p> ";
+if(isset($error)){
+    echo "<pre>";
+    print_r($error);
+    echo "</pre>";
+}
 
 ?>
 

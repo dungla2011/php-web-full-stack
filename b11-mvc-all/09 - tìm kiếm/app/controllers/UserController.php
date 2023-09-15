@@ -12,7 +12,6 @@ class UserController
 
             $search_email = $_GET['search_email'] ?? '';
             
-
             //Limit/Offset 
             $page = $_GET['page'] ?? 1;
             $limit = 5;
@@ -30,11 +29,10 @@ class UserController
             $nPage = ceil($total / $limit);
             
             
-        } catch (PDOException $e) {
-            $error =  "Có lỗi: " . $e->getMessage();
-            // return null;
+        //Bắt lỗi lớp Exception là mọi loại lỗi, kể cả PDOException
+        } catch (Exception $e) {
+            $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
         }
-
         require_once "../app/views/userList.php";
     }
 
@@ -47,9 +45,8 @@ class UserController
                 if($ret){
                     Header("Location: /admin/users");
                 }
-            } catch (PDOException $e) {
-                $error =  "Có lỗi: " . $e->getMessage();
-                return null;
+            } catch (Exception $e) {
+                $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
             }
         }
 
@@ -71,9 +68,8 @@ class UserController
                 //  if($ret){
                 //      Header("Location: /admin/users");
                 // }
-            } catch (PDOException $e) {
-                $error =  "Có lỗi: " . $e->getMessage();
-                return null;
+            } catch (Exception $e) {
+                $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
             }
         }
 
@@ -88,9 +84,10 @@ class UserController
                 if($ret){
                     Header("Location: /admin/users");
                 }
-            } catch (PDOException $e) {
-                echo "<br>Có lỗi: " . $e->getMessage();
-                return null;
+            } catch (Exception $e) {
+                echo "<pre>";
+                print_r("Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString());
+                echo "</pre>";
             }
         }
     }

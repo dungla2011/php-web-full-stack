@@ -39,7 +39,7 @@ Trang:
     }
 ?>
 
-<table border="1">
+<table border="1" style="width: 100%">
     <tr>
 <td>Id</td>
 <td> <a href="/admin/users?sort_by=username&sort_type=<?php echo $sort_type  ?>"> 

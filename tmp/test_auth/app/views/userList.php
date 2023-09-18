@@ -46,7 +46,7 @@ Trang:
 Username </a></td>
 <td> <a href="/admin/users?sort_by=email&sort_type=<?php echo $sort_type  ?>"> 
 Email </a></td>
-
+<td>Admin</td>
 <td>Action</td>
 
     </tr>
@@ -59,11 +59,13 @@ Email </a></td>
         $email = $one['email'];
         $first_name = $one['first_name'];
         $last_name = $one['last_name'];
+        $isAdmin = $one['is_admin'];
 
         echo("\n<tr>");
 
         
         echo("\n<td>  $id </td> <td> $username  </td> <td> $email </td>");
+        echo("\n<td>  $isAdmin </td>");
         echo("\n<td> <a href='/admin/users/edit?id=$id'>  Edit </a> | 
         <a href='/admin/users/delete?id=$id'>  Delete </a> </td>");
         echo("\n</tr>");

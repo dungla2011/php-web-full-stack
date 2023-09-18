@@ -31,6 +31,8 @@ if(isset($error)){
     <p></p>
     Password: <input type="password" name='password' value=''>
     <p></p>
+    IsAdmin: <input type="number" name='is_admin'  value='<?php echo $ret['is_admin'] ?>'>
+    <p></p>
     <input type="submit">
 
 </form>

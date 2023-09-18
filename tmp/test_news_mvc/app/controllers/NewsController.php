@@ -1,7 +1,8 @@
 <?php
-require_once '../app/models/User.php';
-class UserController
+require_once '../app/models/News.php';
+class NewsController
 {
+    
 
     public function list()
     {        
@@ -10,8 +11,8 @@ class UserController
             $sort_by = $_GET['sort_by'] ?? 0;
             $sort_type = $_GET['sort_type'] ?? 0;
 
-            $search_email = $_GET['search_email'] ?? '';
-            
+            $search_name = $_GET['search_name'] ?? '';
+           
 
             //Limit/Offset 
             $page = $_GET['page'] ?? 1;
@@ -20,32 +21,32 @@ class UserController
             'limit' => $limit,
             'sort_by' => $sort_by,
             'sort_type' => $sort_type,
-            'search_email'=> $search_email,
+            'search_name'=> $search_name,
             ];
 
-            $data = User::list($param);
+            $data = News::list($param);
 
 
-            $total = User::count();
+            $total = News::count();
             $nPage = ceil($total / $limit);
             
             
-        //Bắt lỗi lớp Exception là mọi loại lỗi, kể cả PDOException
-        } catch (Exception $e) {
-            $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
+        } catch (PDOException $e) {
+            $error =  "Có lỗi: " . $e->getMessage();
+            // return null;
         }
 
-        require_once "../app/views/userList.php";
+        require_once "../app/views/news/list.php";
     }
 
     public function add()
     {
 
-        if($_POST['username'] ?? ''){
+        if($_POST['name'] ?? ''){
             try{
-                $ret = User::add($_POST);
+                $ret = News::add($_POST);
                 if($ret){
-                    Header("Location: /admin/users");
+                    Header("Location: /admin/news");
                 }
             } catch (PDOException $e) {
                 $error =  "Có lỗi: " . $e->getMessage();
@@ -53,19 +54,18 @@ class UserController
             }
         }
 
-        require_once "../app/views/userAdd.php";
+        require_once "../app/views/news/add.php";
     }
 
     public function edit()
     {
-
         $ret  = null;
         if($id = ($_GET['id'] ?? '')){
             try{
-                $ret = User::get($id);
-                if($_POST['username'] ?? ''){
-                    User::save($id, $_POST);
-                    $ret = User::get($id);
+                $ret = News::get($id);
+                if($_POST['name'] ?? ''){
+                    News::save($id, $_POST);
+                    $ret = News::get($id);
                     $msg = "Update thành công!";
                 }
                 //  if($ret){
@@ -77,21 +77,21 @@ class UserController
             }
         }
 
-        require_once "../app/views/userEdit.php";
+        require_once "../app/views/news/edit.php";
     }
 
     public function delete()
     {
         if($id = ($_GET['id'] ?? '')){
             try{
-                $ret = User::delete($id);
+                $ret = News::delete($id);
                 if($ret){
-                    Header("Location: /admin/users");
+                    Header("Location: /admin/news");
                 }
-            } catch (Exception $e) {
-                echo "<pre>";
-                print_r("Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString());
-                echo "</pre>";
+            } catch (PDOException $e) {
+                echo "<br>Có lỗi: " . $e->getMessage();
+                return null;
             }
         }
     }
+}

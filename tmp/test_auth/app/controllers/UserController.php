@@ -12,7 +12,6 @@ class UserController
 
             $search_email = $_GET['search_email'] ?? '';
             
-
             //Limit/Offset 
             $page = $_GET['page'] ?? 1;
             $limit = 5;
@@ -34,7 +33,6 @@ class UserController
         } catch (Exception $e) {
             $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
         }
-
         require_once "../app/views/userList.php";
     }
 
@@ -47,9 +45,8 @@ class UserController
                 if($ret){
                     Header("Location: /admin/users");
                 }
-            } catch (PDOException $e) {
-                $error =  "Có lỗi: " . $e->getMessage();
-                return null;
+            } catch (Exception $e) {
+                $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
             }
         }
 
@@ -71,9 +68,8 @@ class UserController
                 //  if($ret){
                 //      Header("Location: /admin/users");
                 // }
-            } catch (PDOException $e) {
-                $error =  "Có lỗi: " . $e->getMessage();
-                return null;
+            } catch (Exception $e) {
+                $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
             }
         }
 
@@ -95,3 +91,4 @@ class UserController
             }
         }
     }
+}

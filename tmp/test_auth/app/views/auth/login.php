@@ -8,8 +8,9 @@ require_once "../templates/home/header.php"
 <?php
 if (isset($msg))
     echo "<p> $msg </p> ";
-if (isset($error))
-    echo "<p> $error </p> ";
+if (isset($error)){
+    echo "<p style='color: red'> $error </p> ";
+}
 
 if ($_SESSION['userinfo'] ?? '') {
 ?>

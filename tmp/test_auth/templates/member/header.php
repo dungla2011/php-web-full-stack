@@ -7,6 +7,11 @@
 
 <b style="color: green">
 MEMBER</b>
+
+<?php
+require_once "../templates/logined.php";
+?>
+
 <hr>
 <a href="/">Trang Chủ</a> |
 <a href="/member/orders">Đơn hàng</a> |

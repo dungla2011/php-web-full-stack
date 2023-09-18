@@ -6,6 +6,12 @@
 <body>
 
 <b style="color: red">ADMIN</b>
+
+<?php
+require_once "../templates/logined.php";
+?>
+
+
 <hr>
 <a href="/">Trang Chủ</a> |
 <a href="/admin/news">Tin tức</a> |

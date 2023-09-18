@@ -4,7 +4,6 @@ class User
 
     public static function auth($username, $password)
     {
-        $password = md5($password);
         $conn = Database::getConnection();
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -35,7 +34,7 @@ class User
         $conn = Database::getConnection();
         $username = $params['username'];
         $email = $params['email'];
-        $password = md5($params['password']);
+        $password = $params['password'];
 
         /////////////////////////////////////
         //Cách cơ bản này có thể insert được, nhưng dễ bị tấn công SQL Injection:
@@ -65,7 +64,7 @@ class User
         $conn = Database::getConnection();
         $username = $params['username'];
         $email = $params['email'];
-        $password = md5($params['password']);
+        $password = $params['password'];
         $is_admin = $params['is_admin'];
 
 

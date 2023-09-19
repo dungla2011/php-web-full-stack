@@ -2,9 +2,8 @@
 require_once "../templates/home/header.php"
 ?>
 
-<h1>
-Đăng nhập
-</h1>
+LOGIN
+
 
 <?php 
 
@@ -17,28 +16,25 @@ if(isset($error)){
     echo "</pre>";
 }
 
-if($_SESSION['userinfo'] ?? '' ){
-    echo("\n<a href='/logout'> Đăng xuất </a> ");
-}
-else{
+if( $_SESSION['userinfo'] ?? ''){
+    echo("\n<a href='/logout'> Đăng xuất </a>");
+}else{
+
 ?>
-
-
 <p></p>
 <form action="" method="post">
 
-    Tài khoản/Email: <input type="text" name='username'>
+    Tài khoản <input type="text" name="username" placeholder="Nhập email/tài khoản!">
     <p></p>
-    Mật khẩu: <input type="password" name='password'>
-
+    Mật khẩu: <input type="password" name="password" placeholder="Nhập mật khẩu">
     <p></p>
     <input type="submit" value="Đăng nhập">
+    <p></p>
 
 
 </form>
-<p></p>
-
 <?php 
 }
+
 require_once "../templates/home/footer.php"
 ?>

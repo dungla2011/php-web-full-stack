@@ -7,13 +7,11 @@
 
 <b>HOME</b>
 
-
 <?php
-require '../templates/logined.php';
+
+require "../templates/logined.php";
+
 ?>
-
-
-
 <hr>
 <a href="/">Trang Chủ</a> |
 <a href="/news">Tin tức</a> |

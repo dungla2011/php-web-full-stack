@@ -1,41 +1,39 @@
 <?php
+
 require_once '../app/models/User.php';
 
-
-
 class LoginController {
+    public function login() {
 
-
-    function login(){
-
-        // echo "<pre>";
-        // print_r($_POST);
+        // echo "<pre>SS=";
+        // print_r($_SESSION);
         // echo "</pre>";
 
-
-        if($_SESSION['userinfo'] ?? '' ){
-            $msg = " Bạn đã đăng nhập!";
-        }
-        else
-        if($_POST['username'] ?? '')
-        if($ret = User::auth($_POST['username'], $_POST['password'])){
-            $msg = " Đăng nhập thành công!";
-            // echo "<pre>";
-            // print_r($ret);
-            // echo "</pre>";
-            $_SESSION['userinfo'] = $ret;
-
-        }
-        else{
-            $error = "Sai tên đăng nhập hoặc mật khẩu!";
+        if($_SESSION['userinfo'] ?? ''){
+            $msg = "Bạn đã đăng nhập!";
         }
 
-        require_once "../app/views/auth/login.php";
+        if($_POST['username'] ?? ''){
+            $user = $_POST['username'];
+            $pass = $_POST['password'];
+            $ret = User::auth($user, $pass);
+            if($ret){
+                $_SESSION['userinfo'] = $ret;
+                $msg = " Đăng nhập thành công!";
+            }
+            else{
+                $error = "Sai tên đăng nhập hoặc mật khẩu!";
+            }
+        }
+
+
+        require '../app/views/auth/login.php';
     }
-
-    function logout(){
+    public function logout() {
+        
         session_destroy();
-        header("Location: /login ");
-    }
 
+        header("Location: /login");
+
+    }
 }

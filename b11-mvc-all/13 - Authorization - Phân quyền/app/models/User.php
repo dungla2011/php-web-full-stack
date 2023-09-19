@@ -40,8 +40,8 @@ class User
 
         /////////////////////////////////////
         //Cách cơ bản này có thể insert được, nhưng dễ bị tấn công SQL Injection:
-        $sql = "INSERT INTO users (username, email, password, first_name, last_name)
-        VALUES ('$username', '$email' , '$password', '$first_name', '$last_name')";
+        //$sql = "INSERT INTO users (username, email, password, first_name, last_name)
+        //VALUES ('$username', '$email' , '$password', '$first_name', '$last_name')";
         //return $conn->exec($sql);
 
         // $sql = "INSERT INTO users (username, email, password)

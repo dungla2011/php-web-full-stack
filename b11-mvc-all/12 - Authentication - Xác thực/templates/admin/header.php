@@ -8,9 +8,10 @@
 <b style="color: red">ADMIN</b>
 
 <?php
-require '../templates/logined.php';
-?>
 
+require "../templates/logined.php";
+
+?>
 
 <hr>
 <a href="/">Trang Chủ</a> |

@@ -25,13 +25,18 @@ if(isset($error)){
 
 <form action="" method="post">
 
+<p>
     Username: <input type="text" name='username' value='<?php echo $ret['username'] ?>'>
-    <p></p>
+    </p>
+    <p>
     Email: <input type="text" name='email' value='<?php echo $ret['email'] ?>'>
-    <p></p>
+    </p>
+    <p>
     Password: <input type="password" name='password' value=''>
-    <p></p>
+    </p>
+    <p>
     <input type="submit">
+    </p>
 
 </form>
 

@@ -9,9 +9,10 @@
 MEMBER</b>
 
 <?php
-require '../templates/logined.php';
-?>
 
+require "../templates/logined.php";
+
+?>
 <hr>
 <a href="/">Trang Chủ</a> |
 <a href="/member/orders">Đơn hàng</a> |

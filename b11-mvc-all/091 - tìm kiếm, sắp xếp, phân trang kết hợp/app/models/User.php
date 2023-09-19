@@ -83,14 +83,29 @@ class User
     public static function count($param = null)
     {
         $conn = Database::getConnection();
+
+        $sql = "SELECT count(*) AS c FROM users";
+    
+        $search_email = $param['search_email'];
+        $searchString = null;
+        if($search_email){
+            $searchString = " WHERE email LIKE :search_email ";            
+            $sql = "SELECT count(*) AS c FROM users $searchString ";
+        }        
         // set the PDO error mode to exception
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         //echo "Connected successfully";
-        $stmt = $conn->prepare("SELECT count(*) AS c FROM users");
+        $stmt = $conn->prepare($sql);
+        if($search_email){
+            $search_email = "%$search_email%";
+            $stmt->bindParam(':search_email', $search_email);
+        }
         $stmt->execute();
         // set the resulting array to associative
         $result = $stmt->setFetchMode(PDO::FETCH_ASSOC);
         $ret = $stmt->fetchAll();
+        //        $stmt->debugDumpParams();
+
         return $ret[0]['c'];
     }
 

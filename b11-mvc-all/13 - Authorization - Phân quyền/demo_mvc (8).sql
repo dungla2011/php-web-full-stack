@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 18, 2023 at 12:26 PM
+-- Generation Time: Sep 20, 2023 at 07:02 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -91,20 +91,21 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `first_name`, `last_name`, `phone_number`, `delete_date`, `is_admin`) VALUES
-(20, 'admin', 'admin@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e', NULL, NULL, NULL, '2023-09-08 08:41:09', 1),
-(21, 'member', 'enintend@msn.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL, 0),
-(22, 'admin1', 'admin1@hotmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL, 1),
-(26, 'frikazoyd', 'frikazoyd@sbcglobal.net', '', NULL, NULL, NULL, NULL, 0),
-(27, 'crobles', 'crobles@live.com', '', NULL, NULL, NULL, NULL, 0),
-(28, 'parksh', 'parksh@yahoo.com', '', NULL, NULL, NULL, NULL, 0),
-(29, 'kobayasi', 'kobayasi@aol.com', '', NULL, NULL, NULL, NULL, 0),
+(20, 'admin', 'admin@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, '2023-09-08 08:41:09', 1),
+(21, 'member', 'abc@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL, 0),
+(22, 'admin1', 'abc1@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', NULL, NULL, NULL, NULL, 1),
+(26, 'frikazadmin', 'abc4@gmail.com', '', NULL, NULL, NULL, NULL, 0),
+(27, 'crobles', 'abc5@gmail.com', '', NULL, NULL, NULL, NULL, 0),
+(28, 'parksh', 'abc6@gmail.com', '', NULL, NULL, NULL, NULL, 0),
+(29, 'kobayasi', 'abc7@gmail.com', '', NULL, NULL, NULL, NULL, 0),
 (30, 'bmidd', 'bmidd@gmail.com', '', NULL, NULL, NULL, NULL, 0),
-(31, 'hmbrand', 'hmbrand@live.com', '', NULL, NULL, NULL, NULL, 0),
+(31, 'hmbrand', 'hmbrand@gmail.com', '', NULL, NULL, NULL, NULL, 0),
 (32, 'farber', 'farber@outlook.com', '', NULL, NULL, NULL, NULL, 0),
 (33, 'syrinx1', 'syrinx@optonline.net', '', NULL, NULL, NULL, NULL, 0),
 (34, 'mosses', 'mosses@aol.com', '', NULL, NULL, NULL, NULL, 0),
 (35, 'giafly', 'giafly@verizon.net', '', NULL, NULL, NULL, NULL, 0),
-(36, '121', '2121212', '1212', '12112', '1212', NULL, NULL, 0);
+(36, '121', '2121212', '1212', '12112', '1212', NULL, NULL, 0),
+(38, 'admin2', 'jackma@gmail.com', 'e11170b8cbd2d74102651cb967fa28e5', NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -150,7 +151,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

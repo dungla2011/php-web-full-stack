@@ -118,9 +118,9 @@ class User
         $limit = $param['limit'];
         $offset = ($page - 1) * $limit;
 
-        $sort_by = $param['sort_by'];
-        $sort_type = $param['sort_type'];
-        $search_email = $param['search_email'];
+        $sort_by = $param['sort_by'] ?? '';
+        $sort_type = $param['sort_type'] ?? '';
+        $search_email = $param['search_email'] ?? '';
 
         $searchString = null;
         if($search_email){

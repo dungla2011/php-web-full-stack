@@ -1,11 +1,7 @@
 <?php
-
-class BaseController
+require_once '../app/models/User.php';
+class UserController
 {
-    static public $model;
-    static public $viewPathFolder;
-    static public $adminUrl;
-
 
     public function list()
     {        
@@ -14,7 +10,7 @@ class BaseController
             $sort_by = $_GET['sort_by'] ?? 0;
             $sort_type = $_GET['sort_type'] ?? 0;
 
-            $search_value = $_GET['search_value'] ?? '';
+            $search_email = $_GET['search_email'] ?? '';
             
             //Limit/Offset 
             $page = $_GET['page'] ?? 1;
@@ -23,51 +19,38 @@ class BaseController
             'limit' => $limit,
             'sort_by' => $sort_by,
             'sort_type' => $sort_type,
-            'search_value'=> $search_value,
+            'search_email'=> $search_email,
             ];
 
-            
-            $data = static::$model::list($param);
+            $data = User::list($param);
 
-            $total = static::$model::count($param);
 
+            $total = User::count();
             $nPage = ceil($total / $limit);
-
-            $modelClass = static::$model;
-            
-            $controllerClass = static::class;
             
             
         //Bắt lỗi lớp Exception là mọi loại lỗi, kể cả PDOException
         } catch (Exception $e) {
             $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
         }
-        //require_once "../app/views/product/list.php";
-        //require_once static::$viewPathFolder. "/list.php";
-        require_once "../app/views/base-view/list.php";
+        require_once "../app/views/userList.php";
     }
 
     public function add()
     {
 
-        if($_POST['name'] ?? ''){
+        if($_POST['username'] ?? ''){
             try{
-                $ret = static::$model::add($_POST);
+                $ret = User::add($_POST);
                 if($ret){
-                    Header("Location: " . static::$adminUrl);
+                    Header("Location: /admin/users");
                 }
             } catch (Exception $e) {
                 $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
             }
         }
 
-        $modelClass = static::$model;
-            
-        $controllerClass = static::class;
-        //require_once "../app/views/product/add.php";
-        // require_once static::$viewPathFolder. "/add.php";
-        require_once "../app/views/base-view/add.php";
-
+        require_once "../app/views/userAdd.php";
     }
 
     public function edit()
@@ -76,32 +59,30 @@ class BaseController
         $ret  = null;
         if($id = ($_GET['id'] ?? '')){
             try{
-                $ret = static::$model::get($id);
-                if($_POST['name'] ?? ''){
-                    static::$model::save($id, $_POST);
-                    $ret = static::$model::get($id);
+                $ret = User::get($id);
+                if($_POST['username'] ?? ''){
+                    User::save($id, $_POST);
+                    $ret = User::get($id);
                     $msg = "Update thành công!";
                 }
+                //  if($ret){
+                //      Header("Location: /admin/users");
+                // }
             } catch (Exception $e) {
                 $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
             }
         }
 
-        $modelClass = static::$model;
-        $controllerClass = static::class;
-        //require_once "../app/views/product/edit.php";
-        // require_once static::$viewPathFolder. "/edit.php";
-        require_once "../app/views/base-view/edit.php";
-
+        require_once "../app/views/userEdit.php";
     }
 
     public function delete()
     {
         if($id = ($_GET['id'] ?? '')){
             try{
-                $ret = static::$model::delete($id);
+                $ret = User::delete($id);
                 if($ret){
-                    Header("Location: " . static::$adminUrl);
+                    Header("Location: /admin/users");
                 }
             } catch (Exception $e) {
                 echo "<pre>";

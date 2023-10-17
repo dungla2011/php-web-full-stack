@@ -24,17 +24,6 @@ $routes = [
     '/admin/products' => [ProductController::class, 'list'],
 
 
-    '/admin/news/delete' => [NewsController::class, 'delete'],
-    '/admin/news/add' => [NewsController::class, 'add'],
-    '/admin/news/edit' => [NewsController::class, 'edit'],
-    '/admin/news' => [NewsController::class, 'list'],
-
-    '/admin/student/delete' => [StudentController::class, 'delete'],
-    '/admin/student/add' => [StudentController::class, 'add'],
-    '/admin/student/edit' => [StudentController::class, 'edit'],
-    '/admin/student' => [StudentController::class, 'list'],
-
-    '/news' => [NewsPublicController::class, 'index'],
     '/admin' => [AdminController::class, 'index'],
     '/' => [HomeController::class, 'index'],
 ];

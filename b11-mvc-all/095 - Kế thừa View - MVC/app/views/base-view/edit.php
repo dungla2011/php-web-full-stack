@@ -1,0 +1,67 @@
+
+<?php
+require_once "../templates/admin/header.php";
+
+
+// echo "<pre>";
+// print_r( $ret);
+// echo "</pre>";
+?>
+
+Edit <?php echo $modelClass::$nameView ?>:
+
+<?php 
+
+if(isset($msg))
+    echo "<p> $msg </p> ";
+
+if(isset($error)){
+    echo "<pre>";
+    print_r($error);
+    echo "</pre>";
+}
+
+?>
+
+<form action="" method="post">
+
+<?php 
+
+foreach($modelClass::$fillable AS $field){
+
+    $des = $modelClass::$metaFieldName[$field] ?? $field;
+    $val = $ret[$field];
+
+    $type = $modelClass::$metaFieldType[$field] ?? '';
+    if($type == 'textarea'){
+        echo("\n$des <textarea name='$field'>$val</textarea> <p></p>");
+    }
+    else
+        echo("\n $des <input type='text' name='$field' value='$val'> <p></p> ");
+
+}
+
+
+?>
+
+<!-- 
+    Tên sản phẩm: <input type="text" name='name' value='<?php echo $ret['name'] ?>'>
+    <p></p>
+    Giá: <input type="text" name='price' value='<?php echo $ret['price'] ?>'>
+    <p></p>
+    Mô tả: <input type="text" name='description' value='<?php echo $ret['description'] ?>'>
+    <p></p>
+     -->
+    <input type="submit">
+
+</form>
+
+
+<?php 
+
+?>
+
+<?php
+require_once "../templates/admin/footer.php"
+?>
+

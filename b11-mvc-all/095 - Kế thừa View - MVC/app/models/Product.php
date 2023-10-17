@@ -9,16 +9,17 @@ class Product extends BaseModel
 
     static $search_field = 'name';
 
-    static $sort_field = ['id','name', 'price', 'created_at'];
+    static $sort_field = ['name', 'price'];
 
 
     //Các field sẽ được add/save vào db:
     static $fillable = ['name','cat_id','description','detail', 'price'];
 
 
+    ///
     static $indexListField = ['id','name', 'price', 'created_at', 'cat_id'];
     static $metaFieldName = [
-        'id' => "Mã tin",
+        'id' => "Mã",
         'name'=>"Tên sản phẩm",
         'description' => "Mô tả",
         'detail' => "Chi tiết",
@@ -29,9 +30,15 @@ class Product extends BaseModel
 
     static $metaFieldType = [
         'content' => "textarea",
-        'cat_id' => "checkbox"
+        'cat_id' => "select_box",
+        //'password' => 'password',
+        'detail' => "textarea",
+        'description' => "textarea",
     ];
 
     static $nameView = "Sản phẩm";
+    
+
+    
 
 }

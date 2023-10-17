@@ -38,7 +38,7 @@ class BaseModel{
         foreach($fillable AS $field){
             $strField .= "$field,";
             $strBind .= ":$field,";
-            $arrBind[$field] = $params[$field];
+            $arrBind[] = $params[$field];
         }
         //name,cat_id,description,detail,price
         $strField = trim($strField, ',');
@@ -55,8 +55,7 @@ class BaseModel{
         VALUES ($strBind)");
 
         foreach($arrBind AS $field => $val){
-            //$stmt->bindParam(":$field", $val);
-            $stmt->bindValue(":$field", $val);
+            $stmt->bindParam(":$field", $val);
             // $stmt->bindParam(':username', $username);
             // $stmt->bindParam(':email', $email);
             // $stmt->bindParam(':password', $password); //Password có thể cần thêm băm để bảo mật
@@ -83,24 +82,14 @@ class BaseModel{
         // $params['description'];
         // $params['detail'];
         // $params['price'];
-
-        // echo "<pre>";
-        // print_r($params);
-        // echo "</pre>";
         
         $strField = '';
         $arrBind = [];
         //['name','cat_id','description','detail', 'price']
         foreach($fillable AS $field){
-            if(!isset($params[$field]))
-                continue;
             $strField .= "$field=:$field,";
-            $arrBind[$field] = $params[$field];
+            $arrBind[] = $params[$field];
         }
-
-        // echo "<pre>";
-        // print_r($arrBind);
-        // echo "</pre>";
         //name,cat_id,description,detail,price
         $strField = trim($strField, ',');
 
@@ -112,18 +101,12 @@ class BaseModel{
         // name=:name,cat_id=:cat_id ...
         $stmt = $conn->prepare("UPDATE $table SET $strField WHERE id=$id");
         foreach($arrBind AS $field => $val){
-            //$stmt->bindParam(":$field", $val);
-            $stmt->bindValue(":$field", $val);
+            $stmt->bindParam(":$field", $val);
         }
         // $stmt->bindParam(':id', $id);
         // $stmt->bindParam(':username', $username);
         // $stmt->bindParam(':email', $email);
         // $stmt->bindParam(':password', $password); //Password có thể cần thêm băm để bảo mật
-
-        
-        // echo "<pre>";
-        // print_r($stmt->debugDumpParams());
-        // echo "</pre>";
 
         return $stmt->execute();
     }
@@ -185,10 +168,6 @@ class BaseModel{
 
         $table = static::$table;
         $page = $param['page'];
-
-        if($page <=1)
-            $page = 1;
-
         //Page = 0 -> offset = 0,
         //Page = 1 -> offset = 5,
         //Page = 2 -> offset = 10,...
@@ -226,7 +205,7 @@ class BaseModel{
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
 
         if($search_value){
-            $search_value = "%$search_value%";
+            $search_email = "%$search_value%";
             $stmt->bindParam(':search_value', $search_value);
         }
 

@@ -185,6 +185,10 @@ class BaseModel{
 
         $table = static::$table;
         $page = $param['page'];
+
+        if($page <=1)
+            $page = 1;
+
         //Page = 0 -> offset = 0,
         //Page = 1 -> offset = 5,
         //Page = 2 -> offset = 10,...

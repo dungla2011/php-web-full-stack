@@ -168,15 +168,17 @@ class BaseModel{
 
         $table = static::$table;
         $page = $param['page'];
+        if($page <=1)
+            $page = 1;
         //Page = 0 -> offset = 0,
         //Page = 1 -> offset = 5,
         //Page = 2 -> offset = 10,...
         $limit = $param['limit'];
         $offset = ($page - 1) * $limit;
 
-        $sort_by = $param['sort_by'];
-        $sort_type = $param['sort_type'];
-        $search_value = $param['search_value'];
+        $sort_by = $param['sort_by'] ?? '';
+        $sort_type = $param['sort_type'] ?? '';
+        $search_value = $param['search_value'] ?? '';
 
         $searchString = null;
         if($search_value){
@@ -205,7 +207,7 @@ class BaseModel{
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
 
         if($search_value){
-            $search_email = "%$search_value%";
+            $search_value = "%$search_value%";
             $stmt->bindParam(':search_value', $search_value);
         }
 

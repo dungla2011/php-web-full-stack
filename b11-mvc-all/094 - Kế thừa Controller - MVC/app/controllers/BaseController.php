@@ -2,6 +2,9 @@
 
 class BaseController
 {
+    /**
+     * @var BaseModel
+     */
     static public $model;
     static public $viewPathFolder;
     static public $adminUri;
@@ -43,7 +46,7 @@ class BaseController
     public function add()
     {
 
-        if($_POST['name'] ?? ''){
+        if($_POST[static::$model::$fillable[0]] ?? ''){
             try{
                 $ret = static::$model::add($_POST);
                 if($ret){
@@ -66,7 +69,7 @@ class BaseController
         if($id = ($_GET['id'] ?? '')){
             try{
                 $ret = static::$model::get($id);
-                if($_POST['name'] ?? ''){
+                if($_POST[static::$model::$fillable[0]] ?? ''){
                     static::$model::save($id, $_POST);
                     $ret = static::$model::get($id);
                     $msg = "Update thành công!";

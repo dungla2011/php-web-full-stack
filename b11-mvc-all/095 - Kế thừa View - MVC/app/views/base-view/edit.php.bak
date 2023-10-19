@@ -29,7 +29,7 @@ if(isset($error)){
 
 foreach($modelClass::$fillable AS $field){
 
-    $des = $modelClass::$metaFieldName[$field];
+    $des = $modelClass::$metaFieldName[$field] ?? $field;
     $val = $ret[$field];
 
     $type = $modelClass::$metaFieldType[$field] ?? '';

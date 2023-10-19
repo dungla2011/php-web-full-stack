@@ -81,7 +81,7 @@ class BaseController
         if($id = ($_GET['id'] ?? '')){
             try{
                 $ret = static::$model::get($id);
-                if($_POST[static::$model::$fillable[0]] ?? ''){
+                if(static::$model::$fillable[0] ?? ''){
                     static::$model::save($id, $_POST);
                     $ret = static::$model::get($id);
                     $msg = "Update thành công!";

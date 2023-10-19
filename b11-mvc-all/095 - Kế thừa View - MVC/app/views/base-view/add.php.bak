@@ -24,7 +24,7 @@ if(isset($error)){
     foreach($modelClass::$fillable AS $field){
 
         $des = $modelClass::$metaFieldName[$field];
-        $type = Product::$metaFieldType[$field] ?? '';
+        $type = $modelClass::$metaFieldType[$field] ?? '';
 
         // echo("\n $des <input type='text' name='$field'> <p></p> ");
         if($type == 'textarea'){

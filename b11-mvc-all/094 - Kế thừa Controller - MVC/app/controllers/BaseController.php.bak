@@ -7,8 +7,7 @@ class BaseController
      */
     static public $model;
     static public $viewPathFolder;
-    static public $adminUrl;
-
+    static public $adminUri;
 
     public function list()
     {        
@@ -19,7 +18,6 @@ class BaseController
 
             $search_value = $_GET['search_value'] ?? '';
             
-
             //Limit/Offset 
             $page = $_GET['page'] ?? 1;
             $limit = 5;
@@ -36,41 +34,31 @@ class BaseController
             $total = static::$model::count($param);
 
             $nPage = ceil($total / $limit);
-
-            $modelClass = static::$model;
-            
-            $controllerClass = static::class;
             
             
         //Bắt lỗi lớp Exception là mọi loại lỗi, kể cả PDOException
         } catch (Exception $e) {
             $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
         }
-        //require_once "../app/views/product/list.php";
-        //require_once static::$viewPathFolder. "/list.php";
-        require_once "../app/views/base-view/list.php";
+        require_once static::$viewPathFolder."/list.php";
     }
 
     public function add()
     {
-         //'name, 'username';
+
         if($_POST[static::$model::$fillable[0]] ?? ''){
             try{
                 $ret = static::$model::add($_POST);
                 if($ret){
-                    Header("Location: " . static::$adminUrl);
+                    Header("Location: " . static::$adminUri);
                 }
             } catch (Exception $e) {
                 $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
             }
         }
 
-        $modelClass = static::$model;
-            
-        $controllerClass = static::class;
-        //require_once "../app/views/product/add.php";
-        // require_once static::$viewPathFolder. "/add.php";
-        require_once "../app/views/base-view/add.php";
+        //require_once "../app/views/news/add.php";
+        require_once static::$viewPathFolder."/add.php";
 
     }
 
@@ -81,21 +69,21 @@ class BaseController
         if($id = ($_GET['id'] ?? '')){
             try{
                 $ret = static::$model::get($id);
-                if($_POST[static::$model::$fillable[0]] ?? ''){
+                if(static::$model::$fillable[0] ?? ''){
                     static::$model::save($id, $_POST);
                     $ret = static::$model::get($id);
                     $msg = "Update thành công!";
                 }
+                //  if($ret){
+                //      Header("Location: /admin/users");
+                // }
             } catch (Exception $e) {
                 $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
             }
         }
 
-        $modelClass = static::$model;
-        $controllerClass = static::class;
-        //require_once "../app/views/product/edit.php";
-        // require_once static::$viewPathFolder. "/edit.php";
-        require_once "../app/views/base-view/edit.php";
+        //require_once "../app/views/news/edit.php";
+        require_once static::$viewPathFolder."/edit.php";
 
     }
 
@@ -105,7 +93,8 @@ class BaseController
             try{
                 $ret = static::$model::delete($id);
                 if($ret){
-                    Header("Location: " . static::$adminUrl);
+                    //Header("Location: /admin/news");
+                    Header("Location: " . static::$adminUri);
                 }
             } catch (Exception $e) {
                 echo "<pre>";

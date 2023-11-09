@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        #todoList {
+            max-width: 400px;
+            margin: auto;
+        }
+
+        input[type="text"] {
+            width: 50%;
+            
+        }
+
+        button {
+            
+        }
+
+        .edit-input {
+            display: none;
+        }
+        button.edit_btn , button.save_btn {
+            float: right
+        }
+        button.delete_btn {
+            float: right
+        }
+        div#tasks div {
+            background-color: aliceblue;
+            clear: both;
+            padding: 5px;
+            margin: 5px  0px;
+            font-size: small;
+        }
+
+        span.item {
+            color: blue
+        }
+    </style>
+</head>
+<body>
+    <div id="todoList">
+        <h2>Todo List</h2>
+        <div id="tasks"></div>
+        <div style="clear: both; margin-top: 10px">
+            <input type="text" id="newTask" placeholder="Thêm công việc mới">
+            <button onclick="addTask()">Thêm</button>
+            <button onclick="clearTasks()">Xóa tất cả</button>
+        </div>
+    </div>
+
+    <script>
+        // Lấy danh sách công việc từ localStorage
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+        // Hiển thị công việc
+        function displayTasks() {
+            const tasksList = document.getElementById('tasks');
+            tasksList.innerHTML = '';
+
+            tasks.forEach((task, index) => {
+                const li = document.createElement('div');
+                li.innerHTML = "<span class='item'>" + task + "</span>";
+
+                const editInput = document.createElement('input');
+                editInput.type = 'text';
+                editInput.className = 'edit-input';
+                editInput.addEventListener('keypress', function (ev){
+                    console.log("ev.keyCode " , ev.keyCode)
+                    if(ev.keyCode == 13){
+                        saveEditedTask(index, editInput.value);
+                    }                    
+                });
+
+                const editButton = document.createElement('button');
+                editButton.textContent = 'Sửa';
+                editButton.className = 'edit_btn'
+                editButton.onclick = function() {
+                    editTask(index);
+                };
+
+                const saveButton = document.createElement('button');
+                saveButton.textContent = 'Lưu';
+                saveButton.className = 'save_btn';
+                saveButton.style.display = 'none'; // Ẩn nút "Lưu" ban đầu
+                saveButton.onclick = function() {
+                    saveEditedTask(index, editInput.value);
+                };
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Xóa';
+                deleteButton.className = 'delete_btn'
+                deleteButton.onclick = function() {
+                    deleteTask(index);
+                };
+
+                li.appendChild(editInput);
+                li.appendChild(editButton);
+                li.appendChild(saveButton);
+                li.appendChild(deleteButton);
+                tasksList.appendChild(li);
+            });
+        }
+
+        // Thêm công việc mới
+        function addTask() {
+            const newTaskInput = document.getElementById('newTask');
+            const newTask = newTaskInput.value.trim();
+
+            if (newTask !== '') {
+                tasks.push(newTask);
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+                displayTasks();
+                newTaskInput.value = '';
+            }
+        }
+
+        // Chỉnh sửa công việc
+        function editTask(index) {
+            const li = document.getElementById('tasks').children[index];
+            const editInput = li.querySelector('.edit-input');
+            const editButton = li.querySelector('button');
+            const saveButton = editButton.nextElementSibling;
+
+            // Hiển thị input và ẩn nút "Chỉnh sửa"
+            editInput.style.display = 'inline-block';
+            editInput.className = 'edit_btn'
+            editButton.style.display = 'none';
+            saveButton.style.display = 'inline-block';
+            saveButton.className = 'save_btn'
+
+            // Đặt giá trị của input là nội dung công việc hiện tại
+            editInput.value = li.firstChild.textContent;
+
+            // Tự động chọn toàn bộ nội dung trong input
+            editInput.select();
+
+            // Gắn sự kiện cho sự kiện mất trỏ chuột để lưu thay đổi khi người dùng kết thúc chỉnh sửa
+            editInput.onblur = function() {
+                saveEditedTask(index, editInput.value);
+            };
+        }
+
+        // Lưu công việc sau khi chỉnh sửa
+        function saveEditedTask(index, newText) {
+            tasks[index] = newText;
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            displayTasks();
+        }
+
+        // Xóa công việc
+        function deleteTask(index) {
+            tasks.splice(index, 1);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+            displayTasks();
+        }
+
+        // Xóa tất cả công việc
+        function clearTasks() {
+            localStorage.removeItem('tasks');
+            tasks.length = 0;
+            displayTasks();
+        }
+
+        // Hiển thị công việc ban đầu
+        displayTasks();
+    </script>
+</body>
+</html>

@@ -1,6 +1,9 @@
 
 <?php
-require_once "../templates/admin/header.php"
+require_once "../templates/admin/header.php";
+
+if(isset($modelClass) && $modelClass instanceof BaseModel);
+
 ?>
 
 Thêm <?php echo $modelClass::$nameView ?>:

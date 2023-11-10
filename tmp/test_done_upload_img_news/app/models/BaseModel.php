@@ -1,11 +1,15 @@
 <?php
 class BaseModel{
-
     static $table;
-
     static $fillable;
     static $search_field;
     static $sort_field;
+    static $indexListField;
+    static $metaFieldName;
+    static $metaFieldType;
+    static $nameView;
+    public static function validation($param){
+    }
 
     public static function delete($id)
     {

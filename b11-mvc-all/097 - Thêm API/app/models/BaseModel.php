@@ -67,8 +67,8 @@ class BaseModel{
             // $stmt->bindParam(':email', $email);
             // $stmt->bindParam(':password', $password); //Password có thể cần thêm băm để bảo mật
         }
-       
-        
+
+
         if($stmt->execute())
             return $conn->lastInsertId();            ;
             

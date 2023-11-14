@@ -29,17 +29,28 @@ $routes = [
     '/admin/news/edit' => [NewsController::class, 'edit'],
     '/admin/news' => [NewsController::class, 'list'],
 
+    '/admin/student/delete' => [StudentController::class, 'delete'],
+    '/admin/student/add' => [StudentController::class, 'add'],
+    '/admin/student/edit' => [StudentController::class, 'edit'],
+    '/admin/student' => [StudentController::class, 'list'],
+
     '/news' => [NewsPublicController::class, 'index'],
     '/admin' => [AdminController::class, 'index'],
+
 
     '/api/news/add' => [NewsController::class, 'add_api'],
     '/api/news/get' => [NewsController::class, 'get_api'],
     '/api/news/edit' => [NewsController::class, 'edit_api'],
     '/api/news/delete' => [NewsController::class, 'delete_api'],
-    '/api/news' => [NewsController::class, 'list_api'], 
+    '/api/news' => [NewsController::class, 'list_api'],
 
+
+    '/api/product/add' => [ProductController::class, 'add_api'],
     '/api/product/get' => [ProductController::class, 'get_api'],
+    '/api/product/edit' => [ProductController::class, 'edit_api'],
+    '/api/product/delete' => [ProductController::class, 'delete_api'],
     '/api/product' => [ProductController::class, 'list_api'],
+
 
     '/' => [HomeController::class, 'index'],
 ];
@@ -60,9 +71,10 @@ foreach($routes AS $uri => $arrayCtrl){
     }
 }
 
-if(str_starts_with($rqUri, '/api')){
+if(str_starts_with($rqUri,"/api/")){
     die();
 }
+
 echo("\n<hr/> DEBUG: URI = $rqUri ");
 echo("\n<br/> Controller->Action: $class() -> $method() ");
 echo "<pre> File includes: ";

@@ -17,19 +17,21 @@ if(isset($error)){
 
 ?>
 
-<form action="" method="post">
-
+<form action="" method="post" enctype="multipart/form-data">
 
     <?php 
 
     foreach($modelClass::$fillable AS $field){
 
-        $des = $modelClass::$metaFieldName[$field];
+        $des = $modelClass::$metaFieldName[$field] ?? $field;
         $type = $modelClass::$metaFieldType[$field] ?? '';
 
         // echo("\n $des <input type='text' name='$field'> <p></p> ");
         if($type == 'textarea'){
             echo("\n$des <textarea name='$field'></textarea> <p></p>");
+        }
+        elseif($type == 'image'){
+            echo("\n $des <input type='file' name='$field'> <p></p> ");
         }
         else
             echo("\n $des <input type='text' name='$field'> <p></p> ");

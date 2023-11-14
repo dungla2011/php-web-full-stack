@@ -6,12 +6,6 @@ class BaseModel{
     static $fillable;
     static $search_field;
     static $sort_field;
-    static $indexListField;
-    static $metaFieldName;
-    static $metaFieldType;
-    static $nameView;
-    public static function validation($param){
-    }
 
     public static function delete($id)
     {
@@ -44,7 +38,7 @@ class BaseModel{
         foreach($fillable AS $field){
             $strField .= "$field,";
             $strBind .= ":$field,";
-            $arrBind[$field] = $params[$field] ?? null;
+            $arrBind[$field] = $params[$field];
         }
         //name,cat_id,description,detail,price
         $strField = trim($strField, ',');
@@ -68,11 +62,7 @@ class BaseModel{
             // $stmt->bindParam(':password', $password); //Password có thể cần thêm băm để bảo mật
         }
 
-
-        if($stmt->execute())
-            return $conn->lastInsertId();            ;
-            
-        return null;
+        return $stmt->execute();
     }
 
 

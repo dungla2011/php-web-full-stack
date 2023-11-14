@@ -2,7 +2,6 @@
 <?php
 require_once "../templates/admin/header.php";
 
-if(isset($modelClass) && $modelClass instanceof BaseModel);
 
 // echo "<pre>";
 // print_r( $ret);
@@ -24,7 +23,7 @@ if(isset($error)){
 
 ?>
 
-<form action="" method="post" enctype="multipart/form-data">
+<form action="" method="post">
 
 <?php 
 
@@ -36,11 +35,6 @@ foreach($modelClass::$fillable AS $field){
     $type = $modelClass::$metaFieldType[$field] ?? '';
     if($type == 'textarea'){
         echo("\n$des <textarea name='$field'>$val</textarea> <p></p>");
-    }
-    elseif($type == 'image'){
-        if($val)
-            echo("\n $des <br> <img class='thumb' src='$val'>");
-        echo "<br> <input type='file' name='$field'> <p></p> ";
     }
     else
         echo("\n $des <input type='text' name='$field' value='$val'> <p></p> ");

@@ -96,7 +96,7 @@ class BaseController
 
                 $ret = static::$model::add($_POST);
                 if($ret){
-                    //Header("Location: " . static::$adminUrl);
+                    Header("Location: " . static::$adminUrl);
                 }
             } catch (Exception $e) {
                 $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();

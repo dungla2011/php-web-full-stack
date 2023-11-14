@@ -9,8 +9,52 @@ class BaseController
     static public $viewPathFolder;
     static public $adminUrl;
 
+    public function list_api()
+    {                
+        $ret = static::list(1);
+        echo json_encode($ret,JSON_PRETTY_PRINT);
+        return;
+    }
 
-    public function list()
+    public function get_api()
+    {                
+        $ret  = null;
+        if($id = ($_GET['id'] ?? '')){
+            try{
+                $ret = static::$model::get($id);
+            } catch (Exception $e) {
+                $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
+                echo json_encode(['error'=>1, 'message'=> $e->getMessage], JSON_PRETTY_PRINT);
+            }
+        }
+        echo json_encode($ret,JSON_PRETTY_PRINT);
+        return;
+    }
+
+    public function add_api()
+    {              
+        $ret = static::add(1);
+        echo json_encode($ret,JSON_PRETTY_PRINT);
+        return;
+    }
+
+
+    public function edit_api()
+    {              
+        $ret = static::edit(1);
+        echo json_encode($ret,JSON_PRETTY_PRINT);
+        return;
+    }
+
+    public function delete_api()
+    {              
+        $ret = static::delete(1);
+        echo json_encode($ret,JSON_PRETTY_PRINT);
+        return;
+    }
+
+
+    public function list($isApi = null)
     {        
         try{
             //sort_by=username&sort_type=asc
@@ -40,18 +84,26 @@ class BaseController
             $modelClass = static::$model;
             
             $controllerClass = static::class;
+
+            if($isApi){
+                return ['error'=>0, 'total'=>$total, 'data'=>$data];
+            }
             
             
         //Bắt lỗi lớp Exception là mọi loại lỗi, kể cả PDOException
         } catch (Exception $e) {
             $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
+            if($isApi){
+                return ['error'=>1, 'message'=>$e->getMessage() . " \n". $e->getTraceAsString()];
+            }
         }
+
         //require_once "../app/views/product/list.php";
         //require_once static::$viewPathFolder. "/list.php";
         require_once "../app/views/base-view/list.php";
     }
 
-    public function add()
+    public function add($isApi = 0)
     {
 
 
@@ -61,18 +113,15 @@ class BaseController
 
 
 
-        // die("123");
+        // die("123 - $isApi ");
 
 
-       // echo "<pre>";
-       // print_r($_POST);
-       // echo "</pre>";
+       $error = '';
 
          //'name, 'username';
         if($_POST[static::$model::$fillable[0]] ?? ''){
             try{
 
-                
         // echo "<pre>";
         // print_r($_FILES);
         // echo "</pre>";
@@ -95,16 +144,33 @@ class BaseController
                 }       
 
                 $ret = static::$model::add($_POST);
+
+                if($isApi && $ret){
+                    ob_clean();
+                    return ['error'=>0, 'data'=>$ret , 'message'=>'insert done!'];
+                }
+
                 if($ret){
                     Header("Location: " . static::$adminUrl);
                 }
+                else{
+                    $error =  "Can not add item!";
+                }
+
             } catch (Exception $e) {
                 $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
             }
+
+            if($isApi && $error){
+                return ['error'=>1, 'message'=>$error];
+            }
+        }
+
+        if($isApi){
+            return ['error'=>1, 'message'=>'not valid data?'];
         }
 
         $modelClass = static::$model;
-            
         $controllerClass = static::class;
         //require_once "../app/views/product/add.php";
         // require_once static::$viewPathFolder. "/add.php";
@@ -112,11 +178,13 @@ class BaseController
 
     }
 
-    public function edit()
+    public function edit($isApi = 0)
     {
 
+        $error = '';
         $ret  = null;
         if($id = ($_GET['id'] ?? '')){
+
             try{
                 $ret = static::$model::get($id);
                 if($_POST[static::$model::$fillable[0]] ?? ''){
@@ -135,20 +203,29 @@ class BaseController
                                 throw new Exception("Co loi upload!");
                             if($name)
                                 $_POST[$field] = "/images/$name";                           
-                            
                         }
                         // die();
                     }
 
+                    if(!static::$model::save($id, $_POST))
+                        $error = "Có lôi update!";
 
-                    static::$model::save($id, $_POST);
+                    if($isApi)
+                    {
+                        return ['error'=>0, 'message'=>'update done!'];
+                    }
+
                     $ret = static::$model::get($id);
+
                     $msg = "Update thành công!";
                 }
             } catch (Exception $e) {
                 $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
             }
         }
+
+        if($isApi && $error)
+            return ['error'=>1, 'message'=>$error];
 
         $modelClass = static::$model;
         $controllerClass = static::class;
@@ -158,19 +235,27 @@ class BaseController
 
     }
 
-    public function delete()
+    public function delete($isApi = 0)
     {
         if($id = ($_GET['id'] ?? '')){
             try{
                 $ret = static::$model::delete($id);
                 if($ret){
+                    if($isApi){
+                        return ['error'=>0, 'message'=>'delete done!'];
+                    }
                     Header("Location: " . static::$adminUrl);
                 }
             } catch (Exception $e) {
+                $err = "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
+                if($isApi){
+                    return ['error'=>1, 'message'=> $err];
+                }
                 echo "<pre>";
-                print_r("Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString());
+                print_r($err);
                 echo "</pre>";
             }
         }
+        return ['error'=>1, 'message'=> 'not valid delete?'];
     }
 }

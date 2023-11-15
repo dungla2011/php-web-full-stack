@@ -1,0 +1,30 @@
+table.index td.field_thumb {
+    width: 100px
+}
+
+table.index td.field_thumb img {
+    width: 100px
+}
+
+table.index td.field_created_at{
+    text-align: center;
+    font-size: small;
+}
+
+table.index th {
+    text-align: center;
+}
+
+
+table.index tr td.action{
+    text-align: center;
+    width: 60px
+}
+
+table.index tr td.field_name{
+    font-weight: bold;
+}
+
+table.index tr td.field_id{
+    text-align: center;
+}

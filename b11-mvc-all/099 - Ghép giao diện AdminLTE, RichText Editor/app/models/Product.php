@@ -13,12 +13,12 @@ class Product extends BaseModel
 
 
     //Các field sẽ được add/save vào db:
-    static $fillable = ['name','cat_id', 'thumb','description','detail', 'price'];
-
+    static $fillable = ['name','cat_id', 'price', 'thumb','description','detail'];
 
     ///
     static $indexListField = ['id','name', 'thumb', 'price', 'created_at', 'cat_id'];
     static $metaFieldName = [
+
         'id' => "Mã",
         'name'=>"Tên sản phẩm",
         'thumb' => "Ảnh",
@@ -33,7 +33,7 @@ class Product extends BaseModel
         'content' => "textarea",
         'cat_id' => "select_box",
         //'password' => 'password',
-        'detail' => "textarea",
+        'detail' => "richtext",
         'description' => "textarea",
         'thumb' => "image",
     ];

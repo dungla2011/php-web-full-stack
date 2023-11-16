@@ -15,7 +15,9 @@ $adminUrl = $controllerClass::$adminUrl;
 <i class='fa fa-plus'></i>
 </a>
 <h3 class="card-title">
+    <b>
 Danh sách  <?php echo $modelClass::$nameView ?>  
+</b>
 </h3>
 
 <form action="" method="get">
@@ -56,15 +58,8 @@ if($search_value){
 
 ?>
 
-
 <ul class="pagination pagination-sm float-right">
-<!-- <li class="page-item"><a class="page-link" href="#">«</a></li>
-<li class="page-item"><a class="page-link" href="#">1</a></li>
-<li class="page-item"><a class="page-link" href="#">2</a></li>
-<li class="page-item"><a class="page-link" href="#">3</a></li>
-<li class="page-item"><a class="page-link" href="#">»</a></li> -->
-
-
+<li class="page-item"><a class="page-link" href="#">«</a></li>
 <?php
     if(isset($nPage))
     for($i = 1; $i <= $nPage ; $i++){
@@ -80,8 +75,17 @@ if($search_value){
             $sort_type = 'asc';
     }
 ?>
-
+<li class="page-item"><a class="page-link" href="#">»</a></li>
 </ul>
+
+<select name="" id="" class='form-control float-left form-control-sm select-sm' style='width: 120px'>
+    <option value="">- N / page -</option>
+    <option value="">5 items</option>
+    <option value="">10 items</option>
+    <option value="">20 items</option>
+    <option value="">50 items</option>
+    <option value="">100 items</option>
+</select>
 
 <table class="table table-bordered index">
     <tr>

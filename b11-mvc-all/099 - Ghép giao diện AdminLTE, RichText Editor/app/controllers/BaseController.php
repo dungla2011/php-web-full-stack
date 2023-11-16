@@ -111,9 +111,8 @@ class BaseController
         require_once "../app/views/base-view/list.php";
     }
 
-    public function add($isApi = 1)
+    public function add($isApi = 0)
     {
-
 
        $error = '';
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 14, 2023 at 04:05 AM
+-- Generation Time: Nov 16, 2023 at 02:55 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -42,20 +42,37 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `name`, `thumb`, `description`, `content`, `cat`, `created_at`) VALUES
-(3, 'Tin nhanh', '/images/a2.jpg', 'Mo ta 2', 'Noi dung 2', NULL, '2023-09-14 05:35:55'),
-(4, 'Tin moi', NULL, 'Mo ta 3', 'Cont 3', NULL, '2023-09-14 05:36:07'),
-(5, 'Tin 1', NULL, '123', '456', NULL, '2023-10-18 05:14:21'),
-(6, 'abc', NULL, '123', '455', NULL, '2023-10-18 05:25:13'),
-(7, 'sdfasdf', NULL, 'sdfsdf', 'sdfsdf', NULL, '2023-10-18 05:29:02'),
-(8, '1212', NULL, '1212', '1212', NULL, '2023-10-18 05:29:27'),
-(9, '1212', NULL, '121', '21212', NULL, '2023-10-18 05:50:29'),
-(10, 'dfdsf', NULL, '232', '32323', NULL, '2023-10-18 05:51:19'),
+(3, 'Tin nhanh 1', '/images/a2.jpg', 'abc123', 'Noi dung 2123', NULL, '2023-09-14 05:35:55'),
+(5, 'Tin nhanh 21', '/images/a2.jpg', '123', '456', NULL, '2023-10-18 05:14:21'),
+(8, 'Tin nhanh 3', NULL, '1212', '1212', NULL, '2023-10-18 05:29:27'),
+(9, 'Tin nhanh 5', NULL, '121', '21212', NULL, '2023-10-18 05:50:29'),
+(10, 'Tin nhanh 6', NULL, '232', '32323', NULL, '2023-10-18 05:51:19'),
 (11, '1212', NULL, 'dfdf', 'dfdf', NULL, '2023-10-18 05:52:35'),
 (12, 'Tin 5', '/images/a1.jpg', '', '', NULL, '2023-11-10 09:44:31'),
 (13, '1', '/images/a1.jpg', '', '', NULL, '2023-11-10 09:47:00'),
 (14, '123', '/images/a1.jpg', '', '', NULL, '2023-11-10 09:47:19'),
 (15, '123', '/images/a1.jpg', '', '', NULL, '2023-11-10 09:49:07'),
-(16, '123', '/images/a1.jpg', '', '', NULL, '2023-11-10 09:49:23');
+(16, '123', '/images/a1.jpg', '', '', NULL, '2023-11-10 09:49:23'),
+(17, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:53:25'),
+(18, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:54:29'),
+(19, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:55:10'),
+(20, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:55:57'),
+(21, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:57:23'),
+(22, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:58:27'),
+(23, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:59:02'),
+(24, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:00:24'),
+(25, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:01:44'),
+(26, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:03:10'),
+(27, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:08:02'),
+(28, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:08:06'),
+(29, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:08:35'),
+(30, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:08:54'),
+(31, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:09:02'),
+(32, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:10:00'),
+(33, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:17:44'),
+(34, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:17:48'),
+(35, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:18:13'),
+(39, 'Tin 6', '/images/a1.jpg', '', '', NULL, '2023-11-15 11:58:35');
 
 -- --------------------------------------------------------
 
@@ -66,6 +83,7 @@ INSERT INTO `news` (`id`, `name`, `thumb`, `description`, `content`, `cat`, `cre
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `name` varchar(128) DEFAULT NULL,
+  `thumb` varchar(128) DEFAULT NULL,
   `cat_id` int(11) DEFAULT NULL,
   `description` text DEFAULT NULL,
   `detail` text DEFAULT NULL,
@@ -77,12 +95,15 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `cat_id`, `description`, `detail`, `price`, `created_at`) VALUES
-(3, '<html> <body> <form method=\"GET\" name=\"<?php echo basename($_SERVER[', 0, '212121243563456', '212121243563456', 2147483647, '2023-09-27 08:27:20'),
-(4, '2343', NULL, '2343', '2343', 2343, '2023-09-27 04:27:20'),
-(5, 'Sản phẩm mới', NULL, 'Sản phẩm mới', 'Sản phẩm mới', 0, '2023-09-27 08:51:35'),
-(6, 'Sản phẩm mới', NULL, 'Sản phẩm mới', 'Sản phẩm mới', 0, '2023-09-27 08:51:58'),
-(7, '1212', 1212, '1212', '212', 1212, '2023-10-18 05:36:55');
+INSERT INTO `products` (`id`, `name`, `thumb`, `cat_id`, `description`, `detail`, `price`, `created_at`) VALUES
+(3, 'Iphone 8', '/images/a1.jpg', 0, '212121243563456', '212121243563456', 123456, '2023-09-27 08:27:20'),
+(4, '2343', '/images/a1.jpg', 0, '2343', '2343', 2343, '2023-09-27 04:27:20'),
+(5, 'Sản phẩm mới', NULL, NULL, 'Sản phẩm mới', 'Sản phẩm mới', 0, '2023-09-27 08:51:35'),
+(6, 'Sản phẩm mới', NULL, NULL, 'Sản phẩm mới', 'Sản phẩm mới', 0, '2023-09-27 08:51:58'),
+(7, '1212', NULL, 1212, '1212', '212', 1212, '2023-10-18 05:36:55'),
+(8, 'Iphone', NULL, 0, '', '', 0, '2023-11-14 03:21:53'),
+(9, 'Tin 10', NULL, NULL, NULL, NULL, NULL, '2023-11-14 11:12:23'),
+(10, 'Iphone 20', NULL, NULL, NULL, NULL, NULL, '2023-11-14 11:12:30');
 
 -- --------------------------------------------------------
 
@@ -186,13 +207,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `students`

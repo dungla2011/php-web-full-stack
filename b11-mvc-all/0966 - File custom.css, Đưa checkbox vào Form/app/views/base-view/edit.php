@@ -1,5 +1,5 @@
 <?php
-if($GLOBALS['pageTitle'] ?? '')
+if ($GLOBALS['pageTitle'] ?? '')
     $GLOBALS['pageTitle'] = "Edit "  . $GLOBALS['pageTitle'];
 
 
@@ -35,7 +35,7 @@ if (isset($modelClass) && $modelClass instanceof BaseModel);
             <div class="card-header">
                 <h3 class="card-title">
                     <b>
-                    Edit <?php echo $modelClass::$nameView ?>
+                        Edit <?php echo $modelClass::$nameView ?>
                     </b>
                 </h3>
             </div>
@@ -43,7 +43,7 @@ if (isset($modelClass) && $modelClass instanceof BaseModel);
 
             <form action="" id='myForm' method="post" enctype="multipart/form-data">
                 <div class="card-body">
-                <?php
+                    <?php
 
                     foreach ($modelClass::$fillable as $field) {
 
@@ -52,8 +52,8 @@ if (isset($modelClass) && $modelClass instanceof BaseModel);
 
                         $type = $modelClass::$metaFieldType[$field] ?? '';
 
-                        echo('<div class="form-group">');
-                        echo('<label for="">'.$des.'</label>');
+                        echo ('<div class="form-group">');
+                        echo ('<label for="">' . $des . '</label>');
                         if ($type == 'textarea' || $type == 'richtext') {
                             echo ("\n <textarea id='field_$field' class='form-control' name='$field'>$val</textarea> <p></p>");
                         } elseif ($type == 'image') {
@@ -62,16 +62,13 @@ if (isset($modelClass) && $modelClass instanceof BaseModel);
                             echo "<br> <input class='form-control' type='file' name='$field'> <p></p> ";
                         } elseif ($type == 'checkbox') {
                             $check = '';
-                            if($val)
+                            if ($val)
                                 $check = 'checked';
-                            echo " <input $check id='myCheckbox_$field' type='checkbox'> <input id='myCheckboxHidden_$field' value='0'  type='hidden' name='$field'> <p></p> ";
-                        }
-                        else
+                            echo " <input $check type='checkbox' class='checkBoxInput'> <input value='0'  type='hidden' name='$field'><p></p>";
+                        } else
                             echo ("\n <input class='form-control' type='text' name='$field' value='$val'> <p></p> ");
-                        echo('</div');
+                        echo ('</div');
                     }
-
-
                     ?>
                 </div>
 
@@ -95,19 +92,19 @@ require_once "../templates/admin/footer.php"
 <?php
 foreach ($modelClass::$fillable as $field) {
     $type = $modelClass::$metaFieldType[$field] ?? '';
-    if ($type == 'richtext'){
+    if ($type == 'richtext') {
 ?>
-    <script>
-    $(function () {
-        // Summernote
-        $('#field_<?php echo $field ?>').summernote()
-        // CodeMirror
-        CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
-        mode: "htmlmixed",
-        theme: "monokai"
-        });
-    })
-    </script>
+        <script>
+            $(function() {
+                // Summernote
+                $('#field_<?php echo $field ?>').summernote()
+                // CodeMirror
+                CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                    mode: "htmlmixed",
+                    theme: "monokai"
+                });
+            })
+        </script>
 
 <?php
     }
@@ -116,39 +113,18 @@ foreach ($modelClass::$fillable as $field) {
 
 <script>
 
-document.addEventListener('DOMContentLoaded', function() {
-  // Bắt sự kiện khi form được submit
-  document.getElementById('myForm').addEventListener('submit', function(event) {
-
-    // alert("12345")
-    // Kiểm tra xem checkbox có được chọn hay không
-    var checkbox;
-    var checkboxHidden;
-
-    <?php
-    foreach ($modelClass::$fillable as $field) {
-        $type = $modelClass::$metaFieldType[$field] ?? '';
-
-        if ($type == 'checkbox') {
-    ?>
-        checkbox = document.getElementById('myCheckbox_<?php echo $field ?>');
-        checkboxHidden = document.getElementById('myCheckboxHidden_<?php echo $field ?>');
-        if (checkbox.checked) {
-            // Nếu được chọn, cập nhật giá trị của input hidden thành 1
-            checkboxHidden.value = '1';
-        }
-
-    <?php
-        }
-    }
-    ?>
-
-
-    // Nếu không được chọn, giá trị mặc định (0) của input hidden vẫn được giữ nguyên
-
-    // Tiếp tục submit form
-    return true;
-  });
-});
+    document.querySelectorAll('#myForm input.checkBoxInput').forEach(function(elm) {
+        elm.addEventListener('click', function() {
+            console.log("Click ...");
+            if(this.checked){
+                console.log("checked ...");
+                this.nextElementSibling.value = 1;
+            }
+            else{
+                this.nextElementSibling.value = 0;
+                console.log("not checked ...");
+            }
+        })
+    })
 
 </script>

@@ -1,0 +1,82 @@
+<html>
+  <body>
+    Test fetch, ajax, api:
+    <div id="paginator">
+      <!-- <button id="page1">1</button>
+      <button id="page2">2</button>
+      <button id="page3">3</button> -->
+    </div>
+    <div id="cont"></div>
+  </body>
+</html>
+
+<script>
+    // document.getElementById("page1").addEventListener("click", function () {
+    //   let url = "http://localhost/api/news?page=1";
+    //   renderIndex(url);
+    // });
+    // document.getElementById("page2").addEventListener("click", function () {
+    //   let url = "http://localhost/api/news?page=2";
+    //   renderIndex(url);
+    // });
+    // document.getElementById("page3").addEventListener("click", function () {
+    //   let url = "http://localhost/api/news?page=3";
+    //   renderIndex(url);
+    // });
+
+  let str = "";
+  for (let i = 1; i <= 10; i++) {
+    str += `<button id='page${i}'>${i}</button>`;
+  }
+  document.getElementById("paginator").innerHTML = str;
+
+  for (let i = 1; i <= 10; i++) {
+    document.getElementById("page" + i).addEventListener("click", function () {
+      let url = "http://localhost/api/news?page=" + i;
+      renderIndex(url);
+    });
+  }
+
+
+  let url = "http://localhost/api/news";
+  renderIndex(url);
+
+  function renderIndex(url) {
+    fetch(url)
+      .then((response) => {
+        // Kiểm tra mã trạng thái của response
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        // Chuyển đổi response thành JSON
+        return response.json();
+        // Tra lai text
+        //return response.text();
+      })
+      .then((data) => {
+        // Xử lý dữ liệu ở đây
+        console.log("Kqua: ", data);
+
+        let html = `<table border='1'>`;
+        for (let i in data.data) {
+          let obj = data.data[i];
+
+          let str = `
+                <tr>
+                    <td>${obj.id}</td>
+                    <td>${obj.name}</td>
+                    <td>${obj.thumb}</td>
+                    </tr>
+                `;
+          html += str;
+        }
+        html += "</table>";
+        // console.log("Str =", html);
+        document.getElementById("cont").innerHTML = html;
+      })
+      .catch((error) => {
+        // Xử lý lỗi
+        console.error("Fetch error:", error.message);
+      });
+  }
+</script>

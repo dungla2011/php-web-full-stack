@@ -1,0 +1,30 @@
+<html>
+  <body>
+    Test fetch, post api
+    <div id="cont"></div>
+  </body>
+</html>
+
+<script>
+  let url = "http://localhost/api/news/delete?id=14";
+ 
+  fetch(url, {})
+    .then((response) => {
+      // Kiểm tra mã trạng thái của response
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      // Chuyển đổi response thành JSON
+      // return response.json();
+      // Tra lai text
+      return response.text();
+    })
+    .then((data) => {
+      // Xử lý dữ liệu ở đây
+      console.log("Kqua: ", data);
+    })
+    .catch((error) => {
+      // Xử lý lỗi
+      console.error("Fetch error:", error.message);
+    });
+</script>

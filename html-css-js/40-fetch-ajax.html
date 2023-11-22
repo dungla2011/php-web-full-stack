@@ -1,0 +1,33 @@
+<html>
+
+<body>
+    Test fetch, ajax, api:
+    <div id="cont"></div>    
+</body>
+
+</html>
+
+<script>
+fetch('http://127.0.0.1:5500/f1.txt')
+// fetch('http://localhost/test1.php')
+    .then(response => {
+        // Kiểm tra mã trạng thái của response
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        // Chuyển đổi response thành JSON
+        // return response.json();
+        // Tra lai text
+        //return response.text();
+    })
+    .then(data => {
+        // Xử lý dữ liệu ở đây
+        console.log("Kqua: ", data);
+        
+    })
+    .catch(error => {
+        // Xử lý lỗi
+        console.error('Fetch error:', error.message);
+    });
+</script>
+

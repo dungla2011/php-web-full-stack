@@ -1,0 +1,25 @@
+
+<h1 id="x1" onclick="f1()"> Test addEventListener</h1>
+
+<script>
+
+let elm =  document.getElementById("x1");
+elm.addEventListener("click" , f1);
+elm.addEventListener("click" , f2);
+elm.addEventListener("click" , f3);
+
+window.addEventListener("load",f1)
+
+
+function f1(){
+    console.log(" f1 " + (new Date()).getSeconds());
+}
+function f2(){
+    console.log(" f2 " + (new Date()).getSeconds());
+}
+function f3(){
+    console.log(" f3 " + (new Date()).getSeconds());
+}
+
+
+</script>

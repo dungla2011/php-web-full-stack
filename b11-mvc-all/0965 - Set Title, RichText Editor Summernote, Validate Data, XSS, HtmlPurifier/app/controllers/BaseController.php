@@ -141,6 +141,7 @@ class BaseController
                         move_uploaded_file($filepath, $imgDir . "/". $name);
                         if(!file_exists($imgFullPath))
                             throw new Exception("Co loi upload!");
+                        if($name)
                         $_POST[$field] = "/images/$name";                        
                     }
                 }       

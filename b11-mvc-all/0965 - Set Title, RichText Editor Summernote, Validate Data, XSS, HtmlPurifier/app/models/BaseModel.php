@@ -84,6 +84,9 @@ class BaseModel{
         // configuration goes here:
         $config->set('Core.Encoding', 'UTF-8'); // replace with your encoding
         $config->set('HTML.Doctype', 'XHTML 1.0 Transitional'); // replace with your doctype
+        //Cho phép img datasrc base64
+        $config->set('URI.AllowedSchemes', array('data' => true));
+
         $purifier = new HTMLPurifier($config);
         
 
@@ -156,6 +159,8 @@ class BaseModel{
         // configuration goes here:
         $config->set('Core.Encoding', 'UTF-8'); // replace with your encoding
         $config->set('HTML.Doctype', 'XHTML 1.0 Transitional'); // replace with your doctype
+        //Cho phép img datasrc base64
+        $config->set('URI.AllowedSchemes', array('data' => true));
         $purifier = new HTMLPurifier($config);
 
 

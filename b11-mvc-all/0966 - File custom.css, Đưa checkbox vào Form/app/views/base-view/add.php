@@ -82,6 +82,27 @@ if(isset($error)){
 require_once "../templates/admin/footer.php"
 ?>
 
+<?php
+foreach ($modelClass::$fillable as $field) {
+    $type = $modelClass::$metaFieldType[$field] ?? '';
+    if ($type == 'richtext') {
+?>
+        <script>
+            $(function() {
+                // Summernote
+                $('#field_<?php echo $field ?>').summernote()
+                // CodeMirror
+                CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                    mode: "htmlmixed",
+                    theme: "monokai"
+                });
+            })
+        </script>
+
+<?php
+    }
+}
+?>
 <script>
     document.querySelectorAll('#myForm input.checkBoxInput').forEach(function(elm) {
         elm.addEventListener('click', function() {

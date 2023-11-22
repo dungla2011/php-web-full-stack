@@ -11,6 +11,22 @@ class BaseModel{
     static $metaFieldType;
     static $nameView;
     public static function validation($param){
+        // if($username = ($param['username'] ?? '')){
+        //     //Kiem tra username
+        //     if(strlen($username) > 20 || strlen($username) <8 ){
+        //         throw new Exception("Username khong hop le!");
+        //     }
+        //     //a-z,0 9
+        //     //Preg: bieu thuc chinh quy 
+        //     if(!preg_match('/^[a-z0-9]\w{6,20}[^_]$/i', $username)) {
+        //         throw new Exception("Username khong hop le!");
+        //     }
+
+        //     $email = ($param["email"]) ?? '';
+        //     if ($email && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        //         throw new Exception("Email khong hop le!");
+        //     }
+        // }
     }
 
     public static function delete($id)
@@ -25,6 +41,9 @@ class BaseModel{
 
     public static function add($params)
     {
+
+        static::validation($params);
+
         $table = static::$table;
 
         $conn = Database::getConnection();
@@ -44,7 +63,7 @@ class BaseModel{
         foreach($fillable AS $field){
             $strField .= "$field,";
             $strBind .= ":$field,";
-            $arrBind[$field] = $params[$field];
+            $arrBind[$field] = $params[$field] ?? null;
         }
         //name,cat_id,description,detail,price
         $strField = trim($strField, ',');
@@ -60,15 +79,29 @@ class BaseModel{
         $stmt = $conn->prepare("INSERT INTO $table ($strField) 
         VALUES ($strBind)");
 
+
+        $config = HTMLPurifier_Config::createDefault();
+        // configuration goes here:
+        $config->set('Core.Encoding', 'UTF-8'); // replace with your encoding
+        $config->set('HTML.Doctype', 'XHTML 1.0 Transitional'); // replace with your doctype
+        $purifier = new HTMLPurifier($config);
+        
+
         foreach($arrBind AS $field => $val){
             //$stmt->bindParam(":$field", $val);
+            $val = $purifier->purify($val);
+
             $stmt->bindValue(":$field", $val);
             // $stmt->bindParam(':username', $username);
             // $stmt->bindParam(':email', $email);
             // $stmt->bindParam(':password', $password); //Password có thể cần thêm băm để bảo mật
         }
 
-        return $stmt->execute();
+
+        if($stmt->execute())
+            return $conn->lastInsertId();            ;
+            
+        return null;
     }
 
 
@@ -77,6 +110,9 @@ class BaseModel{
 
         if(!is_numeric($id))
             throw new Exception("Save: Not valid id!");
+
+        static::validation($params);
+
 
         $table = static::$table;
 
@@ -114,10 +150,22 @@ class BaseModel{
         // $email = $params['email'];
         // $password = $params['password'];
 
+
+        
+        $config = HTMLPurifier_Config::createDefault();
+        // configuration goes here:
+        $config->set('Core.Encoding', 'UTF-8'); // replace with your encoding
+        $config->set('HTML.Doctype', 'XHTML 1.0 Transitional'); // replace with your doctype
+        $purifier = new HTMLPurifier($config);
+
+
         //$stmt = $conn->prepare("UPDATE $table SET username = :username, email=:email, password=:password WHERE id=:id");
         // name=:name,cat_id=:cat_id ...
         $stmt = $conn->prepare("UPDATE $table SET $strField WHERE id=$id");
         foreach($arrBind AS $field => $val){
+
+            $val = $purifier->purify($val);
+
             //$stmt->bindParam(":$field", $val);
             $stmt->bindValue(":$field", $val);
         }

@@ -84,6 +84,9 @@ class BaseModel{
         // configuration goes here:
         $config->set('Core.Encoding', 'UTF-8'); // replace with your encoding
         $config->set('HTML.Doctype', 'XHTML 1.0 Transitional'); // replace with your doctype
+        //Cho phép img datasrc base64
+        $config->set('URI.AllowedSchemes', array('data' => true));
+
         $purifier = new HTMLPurifier($config);
         
 
@@ -156,6 +159,9 @@ class BaseModel{
         // configuration goes here:
         $config->set('Core.Encoding', 'UTF-8'); // replace with your encoding
         $config->set('HTML.Doctype', 'XHTML 1.0 Transitional'); // replace with your doctype
+        //Cho phép img datasrc base64
+        $config->set('URI.AllowedSchemes', array('data' => true));
+
         $purifier = new HTMLPurifier($config);
 
 
@@ -163,9 +169,7 @@ class BaseModel{
         // name=:name,cat_id=:cat_id ...
         $stmt = $conn->prepare("UPDATE $table SET $strField WHERE id=$id");
         foreach($arrBind AS $field => $val){
-
             $val = $purifier->purify($val);
-
             //$stmt->bindParam(":$field", $val);
             $stmt->bindValue(":$field", $val);
         }

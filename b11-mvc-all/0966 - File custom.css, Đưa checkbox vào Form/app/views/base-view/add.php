@@ -82,6 +82,7 @@ if(isset($error)){
 require_once "../templates/admin/footer.php"
 ?>
 
+
 <?php
 foreach ($modelClass::$fillable as $field) {
     $type = $modelClass::$metaFieldType[$field] ?? '';
@@ -103,6 +104,7 @@ foreach ($modelClass::$fillable as $field) {
     }
 }
 ?>
+
 <script>
     document.querySelectorAll('#myForm input.checkBoxInput').forEach(function(elm) {
         elm.addEventListener('click', function() {

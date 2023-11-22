@@ -158,6 +158,8 @@ class BaseController
                 $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
             }
         }
+        else
+            $error = "Not valid data post?";
 
         if($isApi){
             return ["error"=> 1, "message"=> $error];
@@ -215,12 +217,17 @@ class BaseController
                         $msg = "Update thành công!";
                     }                    
                 }
+                else{
+                    $error = "Not valid data post?";
+                }
             } catch (Exception $e) {
                 http_response_code(500);
                 $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
                 if($isApi)
                     return ['error'=>1, 'message'=>$error];    
             }
+        }else{
+            $error = "Not valid id post?";
         }
 
         if($isApi){

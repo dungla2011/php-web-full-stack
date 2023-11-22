@@ -164,7 +164,8 @@ class BaseController
                 return ['error'=>1, 'message'=>$error];
             }
         }
-
+        else
+            $error = "Not valid data post?";
         if($isApi){
             return ['error'=>1, 'message'=>'not valid data?'];
         }

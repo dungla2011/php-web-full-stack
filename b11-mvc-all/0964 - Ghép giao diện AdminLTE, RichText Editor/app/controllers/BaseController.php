@@ -138,6 +138,7 @@ class BaseController
                         move_uploaded_file($filepath, $imgDir . "/". $name);
                         if(!file_exists($imgFullPath))
                             throw new Exception("Co loi upload!");
+                        if($name)
                         $_POST[$field] = "/images/$name";                        
                     }
                 }       
@@ -154,6 +155,8 @@ class BaseController
                 $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
             }
         }
+        else
+            $error = "Not valid data post?";
 
         if($isApi){
             return ["error"=> 1, "message"=> $error];
@@ -211,12 +214,17 @@ class BaseController
                         $msg = "Update thành công!";
                     }                    
                 }
+                else{
+                    $error = "Not valid data post?";
+                }
             } catch (Exception $e) {
                 http_response_code(500);
                 $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
                 if($isApi)
                     return ['error'=>1, 'message'=>$error];    
             }
+        }else{
+            $error = "Not valid id post?";
         }
 
         if($isApi){

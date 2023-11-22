@@ -16,19 +16,18 @@ class BaseController
         return;
     }
 
-    public function get_api()
-    {                
-        $ret  = null;
+    public function get_api(){      
+        $error = '';
         if($id = ($_GET['id'] ?? '')){
             try{
                 $ret = static::$model::get($id);
+                echo json_encode(['error'=>0, 'data'=>$ret], JSON_PRETTY_PRINT);
+                return;
             } catch (Exception $e) {
                 $error =  "Có lỗi: " . $e->getMessage() . " \n". $e->getTraceAsString();
-                echo json_encode(['error'=>1, 'message'=> $e->getMessage], JSON_PRETTY_PRINT);
             }
         }
-        echo json_encode($ret,JSON_PRETTY_PRINT);
-        return;
+        echo json_encode(['error'=>1, 'message'=>$error], JSON_PRETTY_PRINT);    
     }
 
     public function add_api()

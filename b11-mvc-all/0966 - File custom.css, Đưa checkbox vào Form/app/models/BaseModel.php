@@ -92,7 +92,8 @@ class BaseModel{
 
         foreach($arrBind AS $field => $val){
             //$stmt->bindParam(":$field", $val);
-            $val = $purifier->purify($val);
+            //Tạm thời disable để có thể add link youtube
+           // $val = $purifier->purify($val);
 
             $stmt->bindValue(":$field", $val);
             // $stmt->bindParam(':username', $username);
@@ -162,6 +163,15 @@ class BaseModel{
         //Cho phép img datasrc base64
         $config->set('URI.AllowedSchemes', array('data' => true));
 
+        //For embed youtube
+//        $config->set('HTML.SafeIframe', true);
+		//$config->set('URI.SafeIframeRegexp', '%^(https?:)?//(www\.youtube(?:-nocookie)?\.com/embed/|player\.vimeo\.com/video/)%'); //allow YouTube and Vimeo
+        //$config->set('Filter.YouTube', true);
+
+		
+        // $config->set('HTML.SafeIframe', true);
+        // $config->set('URI.SafeIframeRegexp', '%^(https?:)?(\/\/www\.youtube(?:-nocookie)?\.com\/embed\/|\/\/player\.vimeo\.com\/)%');
+        
         $purifier = new HTMLPurifier($config);
 
 
@@ -169,7 +179,8 @@ class BaseModel{
         // name=:name,cat_id=:cat_id ...
         $stmt = $conn->prepare("UPDATE $table SET $strField WHERE id=$id");
         foreach($arrBind AS $field => $val){
-            $val = $purifier->purify($val);
+            //Tạm thời disable để có thể add link youtube
+            //$val = $purifier->purify($val);
             //$stmt->bindParam(":$field", $val);
             $stmt->bindValue(":$field", $val);
         }

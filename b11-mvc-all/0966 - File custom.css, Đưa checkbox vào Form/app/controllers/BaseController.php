@@ -92,10 +92,7 @@ class BaseController
 
             $nPage = ceil($total / $limit);
 
-            $modelClass = static::$model;
-            
-            $controllerClass = static::class;
-            
+
             
         //Bắt lỗi lớp Exception là mọi loại lỗi, kể cả PDOException
         } catch (Exception $e) {
@@ -104,7 +101,11 @@ class BaseController
             if($isApi)
                 return ['error'=>1, 'message'=>$error];    
         }
-
+        
+        $modelClass = static::$model;
+            
+        $controllerClass = static::class;
+        
         // if($isApi){
         //     return ['error'=>1, 'message'=>$error];    
         // }
@@ -177,7 +178,7 @@ class BaseController
     public function edit($isApi = 0)
     {
 
-
+        // $json = file_get_contents('php://input');
 
         $error = '';
         $ret  = null;

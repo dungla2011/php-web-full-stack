@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 16, 2023 at 02:55 AM
+-- Generation Time: Nov 17, 2023 at 08:53 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -34,45 +34,48 @@ CREATE TABLE `news` (
   `description` text DEFAULT NULL,
   `content` text DEFAULT NULL,
   `cat` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT current_timestamp()
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `publish` tinyint(4) DEFAULT NULL,
+  `test1` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`id`, `name`, `thumb`, `description`, `content`, `cat`, `created_at`) VALUES
-(3, 'Tin nhanh 1', '/images/a2.jpg', 'abc123', 'Noi dung 2123', NULL, '2023-09-14 05:35:55'),
-(5, 'Tin nhanh 21', '/images/a2.jpg', '123', '456', NULL, '2023-10-18 05:14:21'),
-(8, 'Tin nhanh 3', NULL, '1212', '1212', NULL, '2023-10-18 05:29:27'),
-(9, 'Tin nhanh 5', NULL, '121', '21212', NULL, '2023-10-18 05:50:29'),
-(10, 'Tin nhanh 6', NULL, '232', '32323', NULL, '2023-10-18 05:51:19'),
-(11, '1212', NULL, 'dfdf', 'dfdf', NULL, '2023-10-18 05:52:35'),
-(12, 'Tin 5', '/images/a1.jpg', '', '', NULL, '2023-11-10 09:44:31'),
-(13, '1', '/images/a1.jpg', '', '', NULL, '2023-11-10 09:47:00'),
-(14, '123', '/images/a1.jpg', '', '', NULL, '2023-11-10 09:47:19'),
-(15, '123', '/images/a1.jpg', '', '', NULL, '2023-11-10 09:49:07'),
-(16, '123', '/images/a1.jpg', '', '', NULL, '2023-11-10 09:49:23'),
-(17, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:53:25'),
-(18, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:54:29'),
-(19, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:55:10'),
-(20, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:55:57'),
-(21, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:57:23'),
-(22, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:58:27'),
-(23, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:59:02'),
-(24, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:00:24'),
-(25, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:01:44'),
-(26, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:03:10'),
-(27, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:08:02'),
-(28, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:08:06'),
-(29, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:08:35'),
-(30, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:08:54'),
-(31, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:09:02'),
-(32, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:10:00'),
-(33, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:17:44'),
-(34, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:17:48'),
-(35, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:18:13'),
-(39, 'Tin 6', '/images/a1.jpg', '', '', NULL, '2023-11-15 11:58:35');
+INSERT INTO `news` (`id`, `name`, `thumb`, `description`, `content`, `cat`, `created_at`, `publish`, `test1`) VALUES
+(3, 'Tin nhanh 1', '/images/a5.jpg', '', '', NULL, '2023-09-14 05:35:55', 1, 1),
+(5, 'Tin nhanh 21', '/images/a2.jpg', '123', '456', NULL, '2023-10-18 05:14:21', NULL, NULL),
+(8, 'Tin nhanh 3', '/images/a4.jpg', '1212', '1212', NULL, '2023-10-18 05:29:27', NULL, NULL),
+(12, 'Tin 5', '/images/a1.jpg', '', '', NULL, '2023-11-10 09:44:31', NULL, NULL),
+(13, 'Tin 6', '/images/a1.jpg', '', '', NULL, '2023-11-10 09:47:00', NULL, NULL),
+(14, '123', '/images/a1.jpg', '', '', NULL, '2023-11-10 09:47:19', NULL, NULL),
+(15, '123', '/images/a1.jpg', '', '', NULL, '2023-11-10 09:49:07', NULL, NULL),
+(16, '123', '/images/a1.jpg', '', '', NULL, '2023-11-10 09:49:23', NULL, NULL),
+(17, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:53:25', NULL, NULL),
+(18, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:54:29', NULL, NULL),
+(19, 'Bai viet 1', '/images/a2.jpg', '', '', NULL, '2023-11-14 04:55:10', NULL, NULL),
+(20, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:55:57', NULL, NULL),
+(21, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:57:23', NULL, NULL),
+(22, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:58:27', NULL, NULL),
+(23, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 04:59:02', NULL, NULL),
+(24, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:00:24', NULL, NULL),
+(25, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:01:44', NULL, NULL),
+(26, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:03:10', NULL, NULL),
+(27, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:08:02', NULL, NULL),
+(28, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:08:06', NULL, NULL),
+(29, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:08:35', NULL, NULL),
+(30, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:08:54', NULL, NULL),
+(31, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:09:02', NULL, NULL),
+(32, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:10:00', NULL, NULL),
+(33, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:17:44', NULL, NULL),
+(34, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:17:48', NULL, NULL),
+(35, 'Bai viet 1', NULL, NULL, NULL, NULL, '2023-11-14 05:18:13', NULL, NULL),
+(39, 'Tin 6', '/images/a1.jpg', '', '', NULL, '2023-11-15 11:58:35', NULL, NULL),
+(40, 'Tin 12345', '/images/a4.jpg', 'mo ta 1', 'noi dung 1', NULL, '2023-11-16 05:31:50', NULL, NULL),
+(41, 'Tin 8', '/images/', '', '', NULL, '2023-11-17 07:43:05', 0, 1),
+(42, '123223', '/images/', '', '', NULL, '2023-11-17 07:49:27', 0, 1),
+(43, 't55', '/images/', '', '', NULL, '2023-11-17 07:49:57', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -86,7 +89,7 @@ CREATE TABLE `products` (
   `thumb` varchar(128) DEFAULT NULL,
   `cat_id` int(11) DEFAULT NULL,
   `description` text DEFAULT NULL,
-  `detail` text DEFAULT NULL,
+  `detail` mediumtext DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -96,10 +99,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `thumb`, `cat_id`, `description`, `detail`, `price`, `created_at`) VALUES
-(3, 'Iphone 8', '/images/a1.jpg', 0, '212121243563456', '212121243563456', 123456, '2023-09-27 08:27:20'),
+(3, 'Iphone 8 ', '/images/a1.jpg', 0, '212121243563456', '<p><b><i>Sản phẩm mới!</i></b></p><p><br /></p><p></p><p><br /></p><p></p><div><div></div></div>', 123456, '2023-09-27 08:27:20'),
 (4, '2343', '/images/a1.jpg', 0, '2343', '2343', 2343, '2023-09-27 04:27:20'),
-(5, 'Sản phẩm mới', NULL, NULL, 'Sản phẩm mới', 'Sản phẩm mới', 0, '2023-09-27 08:51:35'),
-(6, 'Sản phẩm mới', NULL, NULL, 'Sản phẩm mới', 'Sản phẩm mới', 0, '2023-09-27 08:51:58'),
 (7, '1212', NULL, 1212, '1212', '212', 1212, '2023-10-18 05:36:55'),
 (8, 'Iphone', NULL, 0, '', '', 0, '2023-11-14 03:21:53'),
 (9, 'Tin 10', NULL, NULL, NULL, NULL, NULL, '2023-11-14 11:12:23'),
@@ -207,7 +208,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `news`
 --
 ALTER TABLE `news`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT for table `products`

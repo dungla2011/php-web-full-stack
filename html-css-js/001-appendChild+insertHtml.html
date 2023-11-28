@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test JS</title>
+</head>
+<body>
+    <h1>Test </h1>
+    <div id="cont" style="border: 1px solid red;"></div>
+
+    <script>
+        let div1 = document.createElement('div');
+        let p1 = document.createElement("p");
+        let txt1 = document.createTextNode('text1')
+        p1.appendChild(txt1);
+        div1.appendChild(p1);        
+        let d0 = document.getElementById("cont");
+        //d0.appendChild(div1)
+
+        d0.insertAdjacentHTML('beforeend', '<div id="c2"> <p>text2</p> </div>')    
+//        document.getElementById("c2").style.color = 'red';
+//        document.getElementById("cont").style = "border: 1px solid red"
+
+    </script>
+</body>
+</html>
+

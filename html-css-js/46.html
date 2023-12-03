@@ -6,10 +6,12 @@
 </html>
 
 <script>
-  
-  let url = "http://localhost/api/news/add";
+
+for(i = 0; i< 1000; i++){
+
+  let url = "https://test3.pm33.net/api/news/add";
   var payload = {
-    'name': "Tin nhanh 1",
+    'name': "Tin nhanh " + i,
   };
   var formBody = [];
   for (var property in payload) {
@@ -44,4 +46,34 @@
       // Xử lý lỗi
       console.error("Fetch error:", error.message);
     });
+  }
+
+
+if(0)
+for(i = 0; i< 1000; i++){
+
+  let url = "https://test3.pm33.net/api/news/delete?id=" + i;
+ 
+  fetch(url, {})
+    .then((response) => {
+      // Kiểm tra mã trạng thái của response
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      // Chuyển đổi response thành JSON
+      // return response.json();
+      // Tra lai text
+      return response.text();
+    })
+    .then((data) => {
+      // Xử lý dữ liệu ở đây
+      console.log("Kqua: ", data);
+    })
+    .catch((error) => {
+      // Xử lý lỗi
+      console.error("Fetch error:", error.message);
+    });
+
+  }
+
 </script>

@@ -1,0 +1,35 @@
+
+
+table.index td.field_thumb {
+    width: 100px;
+}
+
+table.index td.field_thumb img {
+    width: 100px;
+}
+
+table.index th {
+    text-align: center;
+}
+
+table.index td.field_id {
+    text-align: center;
+}
+table.index td.field_created_at {
+    text-align: center;
+    font-size: small;
+}
+
+table.index td.field_price {
+    text-align: right;
+}
+
+
+table.index td.action {
+    text-align: center;
+}
+
+table.index td.checkbox {
+    text-align: center;
+}
+

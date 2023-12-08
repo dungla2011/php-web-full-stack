@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 07, 2023 at 10:04 AM
+-- Generation Time: Dec 08, 2023 at 08:43 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -44,8 +44,8 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`id`, `name`, `thumb`, `description`, `content`, `cat`, `created_at`, `publish`, `test1`) VALUES
-(4204, 'Tin nhanh 111', NULL, '', '', 3, '2023-12-07 08:10:31', 0, NULL),
-(4205, 'Tin 5', NULL, '', '', 2, '2023-12-07 08:38:57', 0, NULL);
+(4204, 'Tin nhanh 111', NULL, '', '', 2, '2023-12-07 08:10:31', 0, NULL),
+(4205, 'Tin 5', NULL, '', '', 3, '2023-12-07 08:38:57', 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -67,8 +67,9 @@ CREATE TABLE `news_cat` (
 INSERT INTO `news_cat` (`id`, `name`, `parent`, `created_at`) VALUES
 (1, 'Tin thể thao', 0, '2023-12-07 06:36:00'),
 (2, 'Giải trí', 0, '2023-12-07 06:49:39'),
-(3, 'Công nghệ', 2, '2023-12-07 07:07:46'),
-(4, 'CNTT', 3, '2023-12-07 08:03:11');
+(3, 'Công nghệ', 0, '2023-12-07 07:07:46'),
+(4, 'CNTT', 3, '2023-12-07 08:03:11'),
+(5, 'Bóng đá', 1, '2023-12-07 10:09:48');
 
 -- --------------------------------------------------------
 
@@ -84,21 +85,23 @@ CREATE TABLE `products` (
   `description` text DEFAULT NULL,
   `detail` mediumtext DEFAULT NULL,
   `price` int(11) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT current_timestamp()
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `images` varchar(512) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `thumb`, `cat_id`, `description`, `detail`, `price`, `created_at`) VALUES
-(3, 'Iphone 8 ', '/images/a1.jpg', 2, '212121243563456', '<p><b><i>Sản phẩm mới!</i></b></p><p><br /></p><p></p><p><br /></p><p></p><div><div></div></div>', 123456, '2023-09-27 08:27:20'),
-(4, '2343', '/images/a1.jpg', 0, '2343', '2343', 2343, '2023-09-27 04:27:20'),
-(7, 'Iphone 8', NULL, 1, '1212', '212', 1212, '2023-10-18 05:36:55'),
-(8, 'Iphone', NULL, 0, '', '', 0, '2023-11-14 03:21:53'),
-(9, 'Tin 10', NULL, NULL, NULL, NULL, NULL, '2023-11-14 11:12:23'),
-(10, 'Iphone 20', NULL, NULL, NULL, NULL, NULL, '2023-11-14 11:12:30'),
-(11, 'Galaxy s30', NULL, 2, '', '', 0, '2023-12-07 08:30:01');
+INSERT INTO `products` (`id`, `name`, `thumb`, `cat_id`, `description`, `detail`, `price`, `created_at`, `images`) VALUES
+(3, 'Iphone 8 ', '/images/a1.jpg', 4, '212121243563456', '<p><b><i>Sản phẩm mới!</i></b></p><p><br /></p><p></p><p><br /></p><p></p><div><div></div></div>', 123456, '2023-09-27 08:27:20', NULL),
+(4, '2343', '/images/a1.jpg', 0, '2343', '2343', 2343, '2023-09-27 04:27:20', NULL),
+(7, 'Iphone 8', NULL, 1, '1212', '212', 1212, '2023-10-18 05:36:55', NULL),
+(8, 'Iphone', NULL, 0, '', '', 0, '2023-11-14 03:21:53', NULL),
+(9, 'Tin 10', NULL, NULL, NULL, NULL, NULL, '2023-11-14 11:12:23', NULL),
+(10, 'Iphone 20', NULL, NULL, NULL, NULL, NULL, '2023-11-14 11:12:30', NULL),
+(11, 'Galaxy s30', '/images/a4.jpg', 2, '', '', 0, '2023-12-07 08:30:01', '/images/a2.jpg\n/images/a3.jpg\n/images/a4.jpg\n/images/a5.jpg\n'),
+(12, 'abc', NULL, 0, '', '', 0, '2023-12-07 15:04:34', '/images/a1.jpg\n/images/a4.jpg\n/images/a5.jpg\n');
 
 -- --------------------------------------------------------
 
@@ -119,8 +122,11 @@ CREATE TABLE `products_cat` (
 
 INSERT INTO `products_cat` (`id`, `name`, `parent`, `created_at`) VALUES
 (1, 'Điện thoại', 0, '2023-12-07 06:36:00'),
-(2, 'Samsung', 0, '2023-12-07 06:49:39'),
-(3, 'Galaxy S', 2, '2023-12-07 07:07:46');
+(2, 'Samsung', 1, '2023-12-07 06:49:39'),
+(3, 'Galaxy S', 2, '2023-12-07 07:07:46'),
+(4, 'Iphone', 1, '2023-12-07 09:30:56'),
+(5, 'Iphone 18', 0, '2023-12-07 09:31:07'),
+(6, 'Galaxy s24', 2, '2023-12-07 09:59:47');
 
 -- --------------------------------------------------------
 
@@ -242,19 +248,19 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `news_cat`
 --
 ALTER TABLE `news_cat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `products_cat`
 --
 ALTER TABLE `products_cat`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `students`
